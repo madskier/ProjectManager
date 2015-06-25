@@ -6,11 +6,15 @@ class Requirement_Model extends Model
         parent::__construct();
     }
     
-    function Insert()
+    function ajaxInsert()
     {
-        $a;
-        $sth = $this->db->prepare('INSERT INTO requirement () VALUES (:a)');
-        $sth->execute(array(':a' => $a));
+        $name;
+        $project;
+        $description;
+        $area;
+        $submittedBy;
+        $sth = $this->db->prepare('INSERT INTO requirement (name, project, description, submitted_by, last_modified_by, area_affected) VALUES (:name, :project, :description, :submittedBy, :lastModifiedBy, :area)');
+        $sth->execute(array(':name' => $name, ':project' => $project, ':description' => $description, ':area' => $area, ':submittedBy' => $submittedBy, ':lastModifiedBy' => $submittedBy));
     }
 }
 

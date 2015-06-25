@@ -6,7 +6,7 @@ class Testcase_Model extends Model
         parent::__construct();
     }
     
-    function Insert()
+    function ajaxInsert()
     {
         $a;
         $sth = $this->db->prepare('INSERT INTO testcase () VALUES (:a)');

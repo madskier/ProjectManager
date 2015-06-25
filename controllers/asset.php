@@ -9,7 +9,8 @@ class Asset extends Controller
 {    
     function __construct()
     {
-        parent::__construct();        
+        parent::__construct();
+        Session::startSession();
         $loggedIn = Session::get('loggedIn');
         
         if ($loggedIn == false)

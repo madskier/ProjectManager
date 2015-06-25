@@ -10,6 +10,7 @@ class Testcase extends Controller
     function __construct()
     {
         parent::__construct();
+        Session::startSession();
         $loggedIn = Session::get('loggedIn');
         
         if ($loggedIn == false)
@@ -45,6 +46,11 @@ class Testcase extends Controller
         Session::endSession();
         header('location: ../index');
         exit;
+    }
+    
+    function ajaxInsert()
+    {
+        $this->model->ajaxInsert();
     }
 }
 
