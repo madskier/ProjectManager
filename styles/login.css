@@ -1,0 +1,47 @@
+.center
+{
+    position:relative;
+    
+    margin-left: auto;
+    margin-right: auto;
+    width: 1200px;   
+    text-align:center;
+}
+
+#formDiv
+{       
+    top: 100px;
+    height: 100%;
+}
+
+tr, td
+{
+    height: 30px;
+    text-align: center;
+}
+
+td
+{
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%)
+}
+
+.cell
+{
+    left: 20%;
+    margin: 0px;
+}
+
+table, #txtUsername, #txtPassword, #submitButton
+{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#spPageTitle
+{
+    height:50px;
+}
+
+

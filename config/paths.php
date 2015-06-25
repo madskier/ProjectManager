@@ -1,0 +1,4 @@
+<?php
+
+define('URL', 'http://localhost:80/ProjectManager/');
+
