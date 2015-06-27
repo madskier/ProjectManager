@@ -291,6 +291,17 @@ ul.nbstyle1
 {
     position:relative;
     top: 100px;
+    margin-left: auto;
+    margin-right: auto;
     height: 100%;
     width: 1200px;   
+}
+
+#btnSubmit
+{    
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
 }

@@ -3,28 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/ProjectManager/controllers/requirement.php</file>
+            <file>file:/C:/xampp/htdocs/ProjectManager/views/dashboard/js/default.js</file>
+            <file>file:/C:/xampp/htdocs/ProjectManager/controllers/test.php</file>
             <file>file:/C:/xampp/htdocs/ProjectManager/views/bug/js/default.js</file>
-            <file>file:/C:/xampp/htdocs/ProjectManager/controllers/project.php</file>
-            <file>file:/C:/xampp/htdocs/ProjectManager/views/bug/edit.php</file>
-            <file>file:/C:/xampp/htdocs/ProjectManager/models/index_model.php</file>
-            <file>file:/C:/xampp/htdocs/ProjectManager/controllers/error.php</file>
-            <file>file:/C:/xampp/htdocs/ProjectManager/models/project_model.php</file>
-            <file>file:/C:/xampp/htdocs/ProjectManager/controllers/testcase.php</file>
-            <file>file:/C:/xampp/htdocs/ProjectManager/controllers/index.php</file>
-            <file>file:/C:/xampp/htdocs/ProjectManager/libs/Session.php</file>
-            <file>file:/C:/xampp/htdocs/ProjectManager/controllers/changerequest.php</file>
             <file>file:/C:/xampp/htdocs/ProjectManager/views/bug/create.php</file>
-            <file>file:/C:/xampp/htdocs/ProjectManager/controllers/help.php</file>
-            <file>file:/C:/xampp/htdocs/ProjectManager/models/bug_model.php</file>
+            <file>file:/C:/xampp/htdocs/ProjectManager/controllers/project.php</file>
             <file>file:/C:/xampp/htdocs/ProjectManager/controllers/dashboard.php</file>
+            <file>file:/C:/xampp/htdocs/ProjectManager/models/bug_model.php</file>
             <file>file:/C:/xampp/htdocs/ProjectManager/views/header.php</file>
+            <file>file:/C:/xampp/htdocs/ProjectManager/models/project_model.php</file>
             <file>file:/C:/xampp/htdocs/ProjectManager/controllers/bug.php</file>
-            <file>file:/C:/xampp/htdocs/ProjectManager/styles/bug.css</file>
-            <file>file:/C:/xampp/htdocs/ProjectManager/views/requirement/create.php</file>
-            <file>file:/C:/xampp/htdocs/ProjectManager/views/bug/list.php</file>
-            <file>file:/C:/xampp/htdocs/ProjectManager/views/project/create.php</file>
-            <file>file:/C:/xampp/htdocs/ProjectManager/controllers/asset.php</file>
+            <file>file:/C:/xampp/htdocs/ProjectManager/controllers/index.php</file>
         </group>
     </open-files>
 </project-private>

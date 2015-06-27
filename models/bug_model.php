@@ -27,9 +27,25 @@ class Bug_Model extends Model
         $sth->execute(array(':area' => $area, ':assignedTo' => $assigned_to, ':description' => $description, ':name' => $name, ':platform' => $platform, ':project' => $project, ':reproSteps' => $repro_steps, ':status' => $status, ':submittedBy' => $submitted_by[0]));
     }
     
-    function ajaxGetList()
+    function ajaxGetArea($projectName)
+    {
+        $sth = $this->db->prepare('SELECT area FROM AreaAffected WHERE project= :projectName');
+        $sth->setFetchMode(PDO::FETCH_ASSOC);
+        $sth->execute(array(':projectName' => $projectName));
+        $data = $sth->fetchAll();
+                
+        foreach($data as $value)
+        {
+            $separater = join(",", $value);
+            echo "<option value=" . $separater . ">" . $separater . "</option>";
+        }
+        unset($value);
+        unset($separater);
+    }
+    
+    function ajaxDelete()
     {
         
-    }
+    }    
 }
 

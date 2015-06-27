@@ -51,11 +51,16 @@ class Bug extends Controller
     function ajaxInsert()
     {
         $this->model->ajaxInsert();
+    }    
+
+    function ajaxDelete()
+    {
+        $this->model->ajaxDelete();
     }
     
-    function ajaxGetList()
+    function ajaxGetArea()
     {
-        $this->model->ajaxGetList();
-    }
-}
+        $this->model->ajaxGetArea();
+    }    
+ }
 

@@ -1,11 +1,12 @@
 <LINK href="<?php echo URL; ?>styles/bug.css" rel="stylesheet" type="text/css">
+<p id="pgTitle">Create a New Bug</p>
 <form id="fCreateBug" name="fCreateBug" method="post" enctype="application/x-www-form-urlencoded" action="<?php echo URL; ?>bug/ajaxInsert/">
     <label id="lblTitle" for="txtTitle">Title</label>
     <input type="text" id="txtTitle" name="txtTitle" required/>
     <label id="lblDescription" for="txtaDescription">Description</label>
     <textarea id="txtaDescription" cols="1" rows="1"></textarea>
     <label id="lblProject" for="ddProject">Project</label>
-    <select id="ddProject" name="ddProject" onchange="">
+    <select id="ddProject" name="ddProject" onchange="populateArea(this.value)">
         <option value="" selected>Select a Project</option>
     </select>
     <label id="lblArea" for="ddArea">Area Affected</label>
@@ -29,3 +30,4 @@
     </select>
     <input type="submit" id="btnSubmit" name="btnSubmit" value="Create Bug"/>
 </form>
+<div id="listInserts"></div>

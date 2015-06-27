@@ -47,6 +47,11 @@ class Project extends Controller
     {
         $this->model->ajaxInsert();
     }
+    
+    function ajaxGetProject($projectName)
+    {
+        $this->model->ajaxGetProject($projectName);
+    }
 }
 
 
