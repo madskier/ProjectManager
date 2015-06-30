@@ -21,4 +21,14 @@ class Index extends Controller
     {
         $this->model->doLogin();
     }
+    
+    function ajaxGetPlatform()
+    {
+        $this->model->ajaxGetPlatform();
+    }
+    
+    function ajaxGetUser()
+    {
+        $this->model->ajaxGetUser();
+    }
 }

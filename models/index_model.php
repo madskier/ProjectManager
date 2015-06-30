@@ -30,5 +30,33 @@ class Index_Model extends Model
             header('location: ../index');
         }
     }
+    
+    function ajaxGetPlatform()
+    {
+        $sth = $this->db->prepare('SELECT id, name FROM platform');
+        $sth->setFetchMode(PDO::FETCH_ASSOC);
+        $sth->execute();
+        $data = $sth->fetchAll();
+        
+        foreach($data as $value)
+        {           
+            echo "<option value='" . $value['id'] . "'>" . $value['name'] . "</option>";
+        }
+        unset($value);
+    }
+    
+    function ajaxGetUser()
+    {
+        $sth = $this->db->prepare('SELECT id, name FROM employee');
+        $sth->setFetchMode(PDO::FETCH_ASSOC);
+        $sth->execute();
+        $data = $sth->fetchAll();
+        
+        foreach($data as $value)
+        {           
+            echo "<option value='" . $value['id'] . "'>" . $value['name'] . "</option>";
+        }
+        unset($value);
+    }
 }
 
