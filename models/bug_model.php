@@ -27,20 +27,21 @@ class Bug_Model extends Model
         $sth->execute(array(':area' => $area, ':assignedTo' => $assigned_to, ':description' => $description, ':name' => $name, ':platform' => $platform, ':project' => $project, ':reproSteps' => $repro_steps, ':status' => $status, ':submittedBy' => $submitted_by[0]));
     }
     
-    function ajaxGetArea($projectName)
-    {
-        $sth = $this->db->prepare('SELECT area FROM AreaAffected WHERE project= :projectName');
+    function ajaxGetArea($projectID)
+    {        
+        $sth = $this->db->prepare('SELECT areaaffected.id, areaaffected.area FROM areaaffected INNER JOIN project ON areaaffected.project = project.name WHERE project.id = :projectID');
         $sth->setFetchMode(PDO::FETCH_ASSOC);
-        $sth->execute(array(':projectName' => $projectName));
+        $sth->execute(array(':projectID' => $projectID));
         $data = $sth->fetchAll();
                 
         foreach($data as $value)
         {
-            $separater = join(",", $value);
-            echo "<option value=" . $separater . ">" . $separater . "</option>";
+            //$separater = join(",", $value);
+            //echo "<option value=" . $separater . ">" . $separater . "</option>";
+            echo "<option value='" . $value['id'] . "'>" . $value['area'] . "</option>";
         }
         unset($value);
-        unset($separater);
+        //unset($separater);        
     }
     
     function ajaxDelete()

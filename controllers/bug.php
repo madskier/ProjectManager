@@ -58,9 +58,9 @@ class Bug extends Controller
         $this->model->ajaxDelete();
     }
     
-    function ajaxGetArea()
+    function ajaxGetArea($projectName)
     {
-        $this->model->ajaxGetArea();
+        $this->model->ajaxGetArea($projectName);
     }    
  }
 

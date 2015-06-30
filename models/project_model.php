@@ -15,16 +15,15 @@ class Project_Model extends Model
     
     function ajaxGetProject()
     {
-        $sth = $this->db->prepare('SELECT name FROM Project');
+        $sth = $this->db->prepare('SELECT id, name FROM Project');
         $sth->setFetchMode(PDO::FETCH_ASSOC);
         $sth->execute();
         $data = $sth->fetchAll();
         //echo "<select id='ddProject' name='ddProject>";
         
         foreach($data as $value)
-        {
-            $separater = join(",", $value);
-            echo "<option value='" . $separater . "'>" . $separater . "</option>";
+        {           
+            echo "<option value='" . $value['id'] . "'>" . $value['name'] . "</option>";
         }
         unset($value);
     }

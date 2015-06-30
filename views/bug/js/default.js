@@ -15,12 +15,12 @@ $(function(){
     });   
 });
 
-function populateArea(projectName)
-{    
-    alert(projectName);
-    var url = "http://localhost:80/ProjectManager/bug/ajaxGetArea/" + projectName;
+function populateArea(projectID)
+{        
+    var url = "http://localhost:80/ProjectManager/bug/ajaxGetArea/" + projectID;
     
     $.get(url, function(result){
+        $('#ddArea').find('option').remove().end().append('<option value="" selected>Select an Area</option>');
         $('#ddArea').append(result);
     });
 }
