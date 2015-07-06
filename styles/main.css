@@ -285,6 +285,7 @@ ul.nbstyle1
 {
     background-image: url('../images/bottom-background.gif');
     background-repeat: repeat-x;
+    height: 100px;
 }
 
 .maincontent

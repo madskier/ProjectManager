@@ -1,4 +1,4 @@
-    </div>
-    <div id="footer" class="bottom-background"></div>
+    </div>    
 </body>
+<!--<footer class="bottom-background"></footer>-->
 </html>

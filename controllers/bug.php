@@ -7,6 +7,7 @@
  */
 class Bug extends Controller
 {    
+    private $jsArray = array('bug/js/default.js');
     function __construct()
     {
         parent::__construct();
@@ -17,8 +18,6 @@ class Bug extends Controller
         {
             $this->logout();
         }
-        
-        $this->view->js = array('bug/js/default.js');
     }
     
     function index()
@@ -28,11 +27,15 @@ class Bug extends Controller
     
     function create()
     {
-        $this->view->render('bug/create', true);
+        array_push($this->jsArray, 'bug/js/create.js'); 
+        $this->view->js = $this->jsArray;
+        $this->view->render('bug/create', true);       
     }
     
     function edit()
     {
+        array_push($this->jsArray, 'bug/js/edit.js'); 
+        $this->view->js = $this->jsArray;
         $this->view->render('bug/edit', true);
     }
     
@@ -51,16 +54,31 @@ class Bug extends Controller
     function ajaxInsert()
     {
         $this->model->ajaxInsert();
-    }    
+    }   
+    
+    function ajaxUpdate()
+    {
+        $this->model->ajaxUpdate();
+    }
 
     function ajaxDelete()
     {
         $this->model->ajaxDelete();
     }
     
-    function ajaxGetArea($projectName)
+    function ajaxGetArea($projectID)
     {
-        $this->model->ajaxGetArea($projectName);
+        $this->model->ajaxGetArea($projectID);
     }    
+    
+    function ajaxGetBugsByProject($projectID)
+    {
+        $this->model->ajaxGetBugsByProject($projectID);
+    }
+    
+    function ajaxGetBugByID($bugID)
+    {
+        $this->model->ajaxGetBugByID($bugID);
+    }
  }
 

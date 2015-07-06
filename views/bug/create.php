@@ -4,9 +4,9 @@
     <label id="lblTitle" for="txtTitle">Title</label>
     <input type="text" id="txtTitle" name="txtTitle" required/>
     <label id="lblDescription" for="txtaDescription">Description</label>
-    <textarea id="txtaDescription" cols="1" rows="1"></textarea>
+    <textarea id="txtaDescription" name="txtaDescription" cols="10" rows="10" form="fCreateBug"></textarea>
     <label id="lblProject" for="ddProject">Project</label>
-    <select id="ddProject" name="ddProject" onchange="populateArea(this.value)">
+    <select id="ddProject" name="ddProject" onchange="getArea(this.value, null)">
         <option value="" selected>Select a Project</option>
     </select>
     <label id="lblArea" for="ddArea">Area Affected</label>
@@ -14,7 +14,7 @@
         <option value="" selected>Select a Project First</option>
     </select>
     <label id="lblRepro" for="txtaRepro">Reproduction Steps</label>
-    <textarea id="txtaRepro" name="textaRepro" cols="1" rows="1" required></textarea>
+    <textarea id="txtaRepro" name="txtaRepro" cols="1" rows="1" form="fCreateBug" required></textarea>
     <label id="lblStatus" for="ddStatus">Status</label>
     <select id="ddStatus" name="ddStatus">
         <option value="Unverified" selected>New - Unverified</option>
@@ -30,4 +30,3 @@
     </select>
     <input type="submit" id="btnSubmit" name="btnSubmit" value="Create Bug"/>
 </form>
-<div id="listInserts"></div>

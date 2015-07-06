@@ -1,17 +1,20 @@
+<LINK href="<?php echo URL; ?>styles/bug.css" rel="stylesheet" type="text/css">
 <div id="divBugSearch">
     <span id="spBugSearch">Search for a Bug</span>
-    <select id="ddProject" name="ddProject" onchange="">
+    <select id="ddSearchProject" name="ddSearchProject" onchange="getTitles(this.value)">
         <option value="" selected>Select a Project</option>
     </select>
-    <select id="ddBugTitle" name="ddBugTitle" onchange="">
+    <select id="ddSearchTitle" name="ddSearchTitle" onchange="getBugByID(this.value)">
         <option value="" selected>Select a Project First</option>
     </select>
 </div>
-<form method="post" name="fEditBug" enctype="application/x-www-form-urlencoded" action="">
+<p id="pgTitle">Edit the Bug</p>
+<form id="fEditBug" method="post" name="fEditBug" enctype="application/x-www-form-urlencoded" action="<?php echo URL; ?>bug/ajaxUpdate/">
+    <input type="hidden" id="hdnID" name="hdnID"/>
     <label id="lblTitle" for="txtTitle">Title</label>
     <input type="text" id="txtTitle" name="txtTitle" required/>
     <label id="lblDescription" for="txtaDescription">Description</label>
-    <textarea id="txtaDescription" cols="1" rows="1"></textarea>
+    <textarea id="txtaDescription" name="txtaDescription" form="fEditBug"></textarea>
     <label id="lblProject" for="ddProject">Project</label>
     <select id="ddProject" name="ddProject" onchange="">
         <option value="" selected>Select a Bug First</option>
@@ -21,7 +24,7 @@
         <option value="" selected>Select a Bug First</option>
     </select>
     <label id="lblRepro" for="txtaRepro">Reproduction Steps</label>
-    <textarea id="txtaRepro" name="textaRepro" cols="1" rows="1" required></textarea>
+    <textarea id="txtaRepro" name="txtaRepro" form="fEditBug" required></textarea>
     <label id="lblStatus" for="ddStatus">Status</label>
     <select id="ddStatus" name="ddStatus">
         <option value="" selected>Select a Bug First</option>        
