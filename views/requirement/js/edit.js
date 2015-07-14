@@ -2,13 +2,13 @@ $(function(){
         
     getProject(null, '#ddSearchProject');
          
-    $('#fEditBug').submit(function() {
+    $('#fEditRequirement').submit(function() {
          var url = $(this).attr('action');
          var data = $(this).serialize();
          
          $.post(url, data, function(callback){
-             alert("Bug Successfully Edited");
-             document.location.href = "http://localhost:80/ProjectManager/requirement/listBug";
+             alert("Requirement Successfully Edited");
+             document.location.href = "listReq";
          });
          return false;
     });
@@ -16,13 +16,13 @@ $(function(){
 
 function getTitles(projectID)
 {
-    var url = "http://localhost:80/ProjectManager/bug/ajaxGetBugsByProject/" + projectID;
+    var url = "http://localhost:80/ProjectManager/requirement/ajaxGetReqsByProject/" + projectID;
     
     $.get(url, function(result)
     {
         if (projectID !== "")
         {            
-            $('#ddSearchTitle').find('option').remove().end().append('<option value="" selected>Select a Bug</option>');
+            $('#ddSearchTitle').find('option').remove().end().append('<option value="" selected>Select a Requirement</option>');
             $('#ddSearchTitle').append(result);
         }
         else
@@ -32,23 +32,17 @@ function getTitles(projectID)
     });
 }
 
-function getBugByID(bugID)
+function getReqByID(reqID)
 {
-    var url = "http://localhost:80/ProjectManager/bug/ajaxGetBugByID/" + bugID;
+    var url = "http://localhost:80/ProjectManager/requirement/ajaxGetReqByID/" + reqID;
     
     $.getJSON(url, function(result)
     {
         $('#txtTitle').val(result.name);
         $('#txtaDescription').val(result.description);        
         getProject(result.projectID, null);        
-        getArea(result.projectID, result.areaID);
-        $('#txtaRepro').val(result.reproSteps);
-        getStatus(result.status, null);
-        getPlatform(result.platformID);
-        getEmployee(result.assignedToID, null);
-        $('#hdnID').val(bugID);
+        getArea(result.projectID, result.areaID);       
+        $('#hdnID').val(reqID);
     });
 }
-
-
 

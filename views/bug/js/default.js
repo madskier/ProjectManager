@@ -1,7 +1,3 @@
-$(function(){
-          
-});
-
 function getArea(projectID, areaID)
 {        
     var url = "http://localhost:80/ProjectManager/bug/ajaxGetArea/" + projectID;

@@ -44,7 +44,7 @@
                         <a class="sub-first" href="<?php echo URL; ?>requirement/create">New Requirement</a>
                     </li>
                     <li>
-                        <a class="sub-last" href="<?php echo URL; ?>requirement/edit">Edit Requirement</a>
+                        <a class="sub-last" href="<?php echo URL; ?>requirement/edit/0">Edit Requirement</a>
                     </li>
                     <li>
                         <a class="sub-last" href="<?php echo URL; ?>requirement/listReq">Requirement List</a>

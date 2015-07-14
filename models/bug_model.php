@@ -7,6 +7,26 @@ class Bug_Model extends Model
         parent::__construct();
     }
     
+    function sendEmail($user, $name, $submittedBy)
+    {
+        $msg = $submittedBy . "has assigned a Bug to you. \r\n Please resolve the issue promptly. \r\n\r\n The Bug Title is " . $name . ".";
+        $subject = "Bug assigned to you";
+        
+        $sth = $this->db->prepare('SELECT email FROM employee WHERE name = :assignedTo');
+        $sth->execute(array(':assignedTo' => $user));
+        
+        $sth2 = $this->db->prepare('SELECT email FROM employee WHERE id = 1');
+        $sth2->execute();
+        
+        $toEmail = $sth->fetch();
+        $fromEmail = $sth2->fetch();
+        $headers = "From: " . $fromEmail . "\r\n" .
+                   "Reply-To: " . $fromEmail . "\r\n" .
+                   "X-Mailer: PHP/" . phpversion();
+        
+        mail($toEmail, $subject, $msg, $headers);
+    }
+    
     function ajaxInsert()
     {
         $area = strip_tags(filter_input(INPUT_POST, 'ddArea'));
@@ -16,7 +36,8 @@ class Bug_Model extends Model
         $platform = strip_tags(filter_input(INPUT_POST, 'ddPlatform'));
         $project = strip_tags(filter_input(INPUT_POST, 'ddProject'));
         $repro_steps = strip_tags(filter_input(INPUT_POST, 'txtaRepro'));
-        $status = strip_tags(filter_input(INPUT_POST, 'ddStatus'));  
+        $status = strip_tags(filter_input(INPUT_POST, 'ddStatus'));
+        
         $username = Session::get('username');
         $sth1 = $this->db->prepare('SELECT name FROM Employee WHERE username = :username');
         $sth1->execute(array(':username' => $username));
@@ -25,6 +46,8 @@ class Bug_Model extends Model
         
         $sth = $this->db->prepare('INSERT INTO bugreport (area_affected, assigned_to, description, name, platform, project, repro_steps, status, submitted_by) VALUES (:area, :assignedTo, :description, :name, :platform, :project, :reproSteps, :status, :submittedBy)');
         $sth->execute(array(':area' => $area, ':assignedTo' => $assigned_to, ':description' => $description, ':name' => $name, ':platform' => $platform, ':project' => $project, ':reproSteps' => $repro_steps, ':status' => $status, ':submittedBy' => $submitted_by[0]));
+        
+        sendEmail($assigned_to, $name, $submitted_by);        
     }
     
     function ajaxUpdate()
@@ -39,8 +62,16 @@ class Bug_Model extends Model
         $status = strip_tags(filter_input(INPUT_POST, 'ddStatus'));
         $id = strip_tags(filter_input(INPUT_POST, 'hdnID'));
         
+        $username = Session::get('username');
+        $sth1 = $this->db->prepare('SELECT name FROM Employee WHERE username = :username');
+        $sth1->execute(array(':username' => $username));
+        
+        $submitted_by = $sth1->fetch();
+        
         $sth = $this->db->prepare('UPDATE bugreport SET area_affected = :area, assigned_to = :assignedTo, description = :description, name = :name, platform = :platform, project = :project, repro_steps = :reproSteps, status = :status WHERE id = :id');
         $sth->execute(array(':area' => $area, ':assignedTo' => $assigned_to, ':description' => $description, ':name' => $name, ':platform' => $platform, ':project' => $project, ':reproSteps' => $repro_steps, ':status' => $status, ':id' => $id));
+        
+        sendEmail($assigned_to, $name, $submitted_by);
     }
     
     function ajaxGetArea($projectID)
