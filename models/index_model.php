@@ -31,6 +31,11 @@ class Index_Model extends Model
         }
     }
     
+    function addUser()
+    {
+        
+    }
+    
     function ajaxGetPlatform()
     {
         $sth = $this->db->prepare('SELECT id, name FROM platform');

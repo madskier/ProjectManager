@@ -1,5 +1,5 @@
 <LINK href="<?php echo URL; ?>styles/requirement.css" rel="stylesheet" type="text/css">
-<div id="divBugSearch">
+<div id="divReqSearch">
     <span id="spReqSearch">Search for a Requirement</span>
     <select id="ddSearchProject" name="ddSearchProject" onchange="getTitles(this.value)">
         <option value="" selected>Select a Project</option>
@@ -9,7 +9,7 @@
     </select>
 </div>
 <p id="pgTitle">Edit the Requirement</p>
-<form id="fEditRequirement" name="fCreateRequirement" method="post" enctype="application/x-www-form-urlencoded" action="<?php echo URL; ?>requirement/ajaxUpdate/">
+<form id="fEditRequirement" name="fEditRequirement" method="post" enctype="application/x-www-form-urlencoded" action="<?php echo URL; ?>requirement/ajaxUpdate/">
     <input type="hidden" id="hdnID" name="hdnID"/>
     <label id="lblReqTitle" for="txtTitle">Title</label>
     <input type="text" id="txtTitle" name="txtTitle" required/>

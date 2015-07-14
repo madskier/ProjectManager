@@ -26,14 +26,14 @@ function getList()
     {
         status = 0;
     }
-    
-    var url = "http://localhost:80/ProjectManager/bug/ajaxGetList/" + project + "/" + assignedTo + "/" + status;
+
+    var url = "http://localhost:80/ProjectManager/bug/ajaxGetList/" + project + "/" + assignedTo + "/" + status + "/";
     
     $.getJSON(url, function(result)
     {       
         for (var i = 0; i < result.length; i++)
         {
-            $('#tbBugList').append('<tr class="main"><td>' + result[i].id + '</td><td>' + result[i].name + '</td><td>' + result[i].status + '</td><td>' + result[i].assigned_to + '</td><td><a href="http://localhost:80/ProjectManager/bug/edit/'+ result[i].id +'">Edit</a></td><td><a href="">View Details</a></td><td><a class="btnDel" rel="'+ result[i].id +'" href="#">Delete</a>'+'</td></tr>');
+            $('#tbBugList').append('<tr class="main"><td>' + result[i].id + '</td><td>' + result[i].name + '</td><td>' + result[i].status + '</td><td>' + result[i].assigned_to + '</td><td><a href="http://localhost:80/ProjectManager/bug/edit/'+ result[i].id +'">Edit</a></td><td><a href="http://localhost:80/ProjectManager/bug/view/'+ result[i].id +'">View Details</a></td><td><a class="btnDel" rel="'+ result[i].id +'" href="#">Delete</a>'+'</td></tr>');
         }  
         
         $('.btnDel').click(function(){
@@ -46,7 +46,7 @@ function getList()
             }
             
             return false;
-        });
+        });        
     });   
 }
 

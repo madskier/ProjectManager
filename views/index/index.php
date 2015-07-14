@@ -24,15 +24,15 @@
             </tr>
             <tr>
                 <td class="cell">
-                    <a href="forgotPassword.html">Forgot Username</a>
+                    <a href="<?php echo URL; ?>index/forgotUsername">Forgot Username</a>
                 </td>
                 <td class="cell">
-                    <a href="forgotPassword.html">Forgot Password</a>
+                    <a href="<?php echo URL; ?>index/forgotPassword">Forgot Password</a>
                 </td>
             </tr>
         </table>
     </form>
-    <p>Don't have an account? <a href="newAccount.html">Sign up here &gt;&gt;</a></p>
+    <p>Don't have an account? <a href="<?php echo URL; ?>index/signup">Sign up here &gt;&gt;</a></p>
 </div>
 
 

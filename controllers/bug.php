@@ -50,6 +50,16 @@ class Bug extends Controller
         $this->view->render('bug/list', true);
     }
     
+    function view($id)
+    {
+        $this->view->js = $this->jsArray;
+        $this->view->render('bug/view', true);
+        if ($id !== 0)
+        {
+            echo '<script type="text/javascript">', 'getBugByID('. $id . ');', '</script>';
+        }
+    }
+    
     function logout()
     {
         Session::endSession();

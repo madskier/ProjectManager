@@ -141,9 +141,9 @@ class Bug_Model extends Model
             $sql .= ' AND bugreport.assigned_to = ' . (string)$assignedTo;
         }
         
-        if ($status != 0)
+        if ($status != "" && (string)$status != "0")
         {
-            $sql .= ' AND bugreport.status = ' . $status;
+            $sql .= ' AND bugreport.status = "' . (string)$status . '"';
         }
         
         $sql .= ' ORDER BY bugreport.id';
@@ -151,8 +151,8 @@ class Bug_Model extends Model
         $sth = $this->db->prepare($sql);
         $sth->setFetchMode(PDO::FETCH_ASSOC);
         $sth->execute();
-        $data = $sth->fetchAll(); 
-        echo json_encode($data);
+        $data = $sth->fetchAll();        
+        echo json_encode($data);        
     }
     
     function ajaxDelete($id)

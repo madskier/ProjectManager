@@ -14,7 +14,7 @@ class Requirement_Model extends Model
         $area = strip_tags(filter_input(INPUT_POST, 'ddArea'));        
         
         $username = Session::get('username');
-        $sth1 = $this->db->prepare('SELECT name FROM Employee WHERE username = :username');
+        $sth1 = $this->db->prepare('SELECT id FROM Employee WHERE username = :username');
         $sth1->execute(array(':username' => $username));
         
         $submittedBy = $sth1->fetch();
@@ -33,7 +33,7 @@ class Requirement_Model extends Model
         $id = strip_tags(filter_input(INPUT_POST, 'hdnID'));
         
         $username = Session::get('username');
-        $sth1 = $this->db->prepare('SELECT name FROM Employee WHERE username = :username');
+        $sth1 = $this->db->prepare('SELECT id FROM Employee WHERE username = :username');
         $sth1->execute(array(':username' => $username));
         
         $submitted_by = $sth1->fetch();
@@ -74,5 +74,39 @@ class Requirement_Model extends Model
         
         echo json_encode($data);
     }
+    
+    function ajaxGetList($projectID, $lastModifiedBy, $area)
+    {
+        $sql = 'SELECT requirement.id, requirement.name, areaaffected.area AS area_affected, employee.name AS last_modified_by FROM requirement INNER JOIN areaaffected ON areaaffected.id = requirement.area_affected INNER JOIN employee ON employee.id = requirement.last_modified_by WHERE requirement.id > 0';        
+                
+        if ($projectID > 0)
+        {
+            $sql .= ' AND requirement.project = ' . (string)$projectID;
+        }
+        
+        if ($lastModifiedBy > 0)
+        {
+            $sql .= ' AND requirement.last_modified_by = ' . (string)$lastModifiedBy;
+        }
+        
+        if ($area != 0)
+        {
+            $sql .= ' AND requirement.area_affected = ' . $area;
+        }
+        
+        $sql .= ' ORDER BY requirement.id';
+        
+        $sth = $this->db->prepare($sql);
+        $sth->setFetchMode(PDO::FETCH_ASSOC);
+        $sth->execute();
+        $data = $sth->fetchAll(); 
+        echo json_encode($data);
+    }
+    
+    function ajaxDelete($id)
+    {
+        $sth = $this->db->prepare('DELETE FROM requirement WHERE id = :id');
+        $sth->execute(array(':id' => $id));
+    }    
 }
 

@@ -52,6 +52,17 @@ class Requirement extends Controller
         $this->view->render('requirement/list', true);
     }
     
+    function view($id)
+    {
+        $this->view->js = $this->jsArray;
+        $this->view->render('requirement/view', true);
+        
+        if ($id !== 0)
+        {
+            echo '<script type="text/javascript">', 'getReqByID(' . $id . ');' , '</script>';
+        }
+    }
+    
     function logout()
     {
         Session::endSession();
@@ -79,9 +90,14 @@ class Requirement extends Controller
         $this->model->ajaxGetReqsByProject($projectID);
     }
     
-     function ajaxGetReqByID($reqID)
+    function ajaxGetReqByID($reqID)
     {
         $this->model->ajaxGetReqByID($reqID);
+    }
+    
+    function ajaxGetList($projectID, $lastModifiedBy, $area)
+    {
+        $this->model->ajaxGetList($projectID, $lastModifiedBy, $area);
     }
 }
 

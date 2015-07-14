@@ -50,7 +50,7 @@
     position: absolute;
     left: 150px;
     top: 330px;
-    width: 200px;
+    width: 250px;
     height: 22px;
     z-index: 14;
 }
@@ -69,35 +69,16 @@
     position: absolute;
     left: 150px;
     top: 370px;
-    width: 200px;
+    width: 250px;
     height: 22px;
     z-index: 8;
-}
-
-#lblRepro
-{
-    position: absolute;
-    left: 20px;
-    top: 450px;
-    width: 120px;
-    height: 16px;
-}
-
-#txtaRepro
-{
-    position: absolute;
-    left: 150px;
-    top: 410px;
-    width: 200px;
-    height: 104px;
-    z-index: 10;
 }
 
 #lblStatus
 {
     position: absolute;
     left: 20px;
-    top: 540px;
+    top: 440px;
     width: 37px;
     height: 16px;
 }
@@ -106,27 +87,27 @@
 {
     position: absolute;
     left: 150px;
-    top: 540px;
-    width: 200px;
+    top: 440px;
+    width: 250px;
     height: 22px;
     z-index: 12;
 }
 
-#lblPlatform
+#lblPriority
 {
     position: absolute;
     left: 20px;
-    top: 580px;
+    top: 480px;
     width: 72px;
     height: 23px;
 }
 
-#ddPlatform
+#ddPriority
 {
     position: absolute;
     left: 150px;
-    top: 580px;
-    width: 200px;
+    top: 480px;
+    width: 250px;
     height: 22px;
     z-index: 15;
 }
@@ -135,7 +116,7 @@
 {
     position: absolute;
     left: 20px;
-    top: 620px;
+    top: 520px;
     width: 86px;
     height: 21px;
 }
@@ -144,8 +125,8 @@
 {
     position: absolute;
     left: 150px;
-    top: 620px;
-    width: 200px;
+    top: 520px;
+    width: 250px;
     height: 22px;
     z-index: 16;
 }
@@ -153,7 +134,7 @@
 #btnSubmit
 {
     position: absolute;
-    top: 660px;
+    top: 560px;
     left: 150px;
 }
 

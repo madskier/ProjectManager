@@ -6,7 +6,7 @@
     <label id="lblDescription" for="txtaDescription">Description</label>
     <textarea id="txtaDescription" name="txtaDescription" cols="1" rows="1" required></textarea>
     <label id="lblProject" for="ddProject">Project</label>
-    <select id="ddProject" name="ddProject" onchange="getArea(this.value, null)">
+    <select id="ddProject" name="ddProject" onchange="getArea(this.value, null, null)">
         <option value="" selected>Select a Project</option>
     </select>
     <label id="lblArea" for="ddArea">Area Affected</label>

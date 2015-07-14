@@ -61,10 +61,10 @@
                         <a class="sub-first" href="<?php echo URL; ?>changerequest/create">New CR</a>
                     </li>
                     <li>
-                        <a class="sub-last" href="<?php echo URL; ?>changerequest/edit">Edit CR</a>
+                        <a class="sub-last" href="<?php echo URL; ?>changerequest/edit/0">Edit CR</a>
                     </li>
                     <li>
-                        <a class="sub-last" href="<?php echo URL; ?>changerequest/list">CR List</a>
+                        <a class="sub-last" href="<?php echo URL; ?>changerequest/listCR">CR List</a>
                     </li>
                 </ul>
             </li>
@@ -78,7 +78,7 @@
                         <a class="sub-first" href="<?php echo URL; ?>testcase/create">New Test Case</a>
                     </li>
                     <li>
-                        <a class="sub-last" href="<?php echo URL; ?>testcase/edit">Edit Test Case</a>
+                        <a class="sub-last" href="<?php echo URL; ?>testcase/edit/0">Edit Test Case</a>
                     </li>
                     <li>
                         <a class="sub-last" href="<?php echo URL; ?>testcase/listTC">Test Case List</a>

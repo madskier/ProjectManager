@@ -8,7 +8,7 @@ $(function(){
          
          $.post(url, data, function(callback){
              alert("Requirement Successfully Created");
-             document.location.href = "listReq";
+             document.location.href = "http://localhost:80/ProjectManager/requirement/listReq";
          });
          return false;
     });
