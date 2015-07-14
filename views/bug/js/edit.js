@@ -1,14 +1,7 @@
 $(function(){
-    
-    if(window.location.href.indexOf("id") > -1) {
-        var id = window.location.href.indexOf("id");
-        getBugByID(id);
-    }
-    else
-    {
-        getSearchProject();
-    }
-     
+        
+    getSearchProject();
+         
     $('#fEditBug').submit(function() {
          var url = $(this).attr('action');
          var data = $(this).serialize();
@@ -55,28 +48,15 @@ function getBugByID(bugID)
     {
         $('#txtTitle').val(result.name);
         $('#txtaDescription').val(result.description);        
-        getProject(result.projectID);        
+        getProject(result.projectID, null);        
         getArea(result.projectID, result.areaID);
         $('#txtaRepro').val(result.reproSteps);
-        getStatus(result.status);
+        getStatus(result.status, null);
         getPlatform(result.platformID);
-        getEmployee(result.assignedToID);
+        getEmployee(result.assignedToID, null);
         $('#hdnID').val(bugID);
     });
 }
 
-function getStatus(currStatus)
-{
-    $('#ddStatus').find('option').remove().end().append('<option value="">Select a Status</option>');
-    $('#ddStatus').append('<option value="Unverified">Unverified</option>');
-    $('#ddStatus').append('<option value="Verified">Verified</option>');
-    $('#ddStatus').append('<option value="Active">Active</option>');
-    $('#ddStatus').append('<option value="Fixed">Fixed</option>');
-    $('#ddStatus').append('<option value="Cannot Reproduce">Cannot Reproduce</option>');
-    $('#ddStatus').append('<option value="Deffered">Deffered</option>');
-    $('#ddStatus').append('<option value="Closed">Closed</option>');
-    
-    $('#ddStatus').val(currStatus).attr('selected', true);
-}
 
 

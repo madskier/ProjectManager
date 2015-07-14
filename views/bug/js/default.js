@@ -38,28 +38,60 @@ function getPlatform(platformID)
     });
 }
 
-function getProject(projectID)
+function getProject(projectID, fieldName)
 {
+    if (fieldName === null)
+    {
+        fieldName = '#ddProject';
+    }
+    
     $.get('http://localhost:80/ProjectManager/project/ajaxGetProject', function(result){
-        $('#ddProject').find('option').remove().end().append('<option value="">Select a Project</option>');
-        $('#ddProject').append(result);
+        $(fieldName).find('option').remove().end().append('<option value="">Select a Project</option>');
+        $(fieldName).append(result);
         
         if (projectID !== null)
         {
-            $('#ddProject').val(projectID).attr('selected', true);
+            $(fieldName).val(projectID).attr('selected', true);
         }                
     });
 }
 
-function getEmployee(employeeID)
+function getEmployee(employeeID, fieldName)
 {
+    if (fieldName === null)
+    {
+        fieldName = '#ddAssignedTo';
+    }
+    
     $.get('http://localhost:80/ProjectManager/index/ajaxGetUser', function(result){
-        $('#ddAssignedTo').find('option').remove().end().append('<option value="" selected>Select a User</option>');
-        $('#ddAssignedTo').append(result);
+        $(fieldName).find('option').remove().end().append('<option value="" selected>Select a User</option>');
+        $(fieldName).append(result);
         
         if (employeeID !== null)
         {
-            $('#ddAssignedTo').val(employeeID).attr('selected', true);
+            $(fieldName).val(employeeID).attr('selected', true);
         }
     });
+}
+
+function getStatus(currStatus, fieldName)
+{
+    if (fieldName === null)
+    {
+        fieldName = '#ddStatus';
+    }
+    
+    $(fieldName).find('option').remove().end().append('<option value="">Select a Status</option>');
+    $(fieldName).append('<option value="Unverified">Unverified</option>');
+    $(fieldName).append('<option value="Verified">Verified</option>');
+    $(fieldName).append('<option value="Active">Active</option>');
+    $(fieldName).append('<option value="Fixed">Fixed</option>');
+    $(fieldName).append('<option value="Cannot Reproduce">Cannot Reproduce</option>');
+    $(fieldName).append('<option value="Deffered">Deffered</option>');
+    $(fieldName).append('<option value="Closed">Closed</option>');
+    
+    if (currStatus !== null)
+    {
+        $(fieldName).val(currStatus).attr('selected', true);
+    }
 }

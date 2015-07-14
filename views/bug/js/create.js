@@ -1,8 +1,8 @@
 $(function(){
     
-    getProject(null);
+    getProject(null, null);
     getPlatform(null);
-    getEmployee(null);
+    getEmployee(null, null);
     
     $('#fCreateBug').submit(function() {
          var url = $(this).attr('action');

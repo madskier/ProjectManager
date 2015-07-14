@@ -27,7 +27,7 @@
                         <a class="sub-first" href="<?php echo URL; ?>bug/create">New Bug</a>
                     </li>
                     <li>
-                        <a class="sub-first" href="<?php echo URL; ?>bug/edit">Edit Bug</a>
+                        <a class="sub-first" href="<?php echo URL; ?>bug/edit/0">Edit Bug</a>
                     </li>
                     <li>
                         <a class="sub-first" href="<?php echo URL; ?>bug/listBug">Bug List</a>
@@ -58,13 +58,13 @@
                 </a>
                 <ul>
                     <li>
-                        <a class="sub-first" href="<?php echo URL; ?>changerequest/create">New Requirement</a>
+                        <a class="sub-first" href="<?php echo URL; ?>changerequest/create">New CR</a>
                     </li>
                     <li>
-                        <a class="sub-last" href="<?php echo URL; ?>changerequest/edit">Edit Requirement</a>
+                        <a class="sub-last" href="<?php echo URL; ?>changerequest/edit">Edit CR</a>
                     </li>
                     <li>
-                        <a class="sub-last" href="<?php echo URL; ?>changerequest/list">Requirement List</a>
+                        <a class="sub-last" href="<?php echo URL; ?>changerequest/list">CR List</a>
                     </li>
                 </ul>
             </li>

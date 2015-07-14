@@ -32,15 +32,21 @@ class Bug extends Controller
         $this->view->render('bug/create', true);       
     }
     
-    function edit()
+    function edit($id)
     {
         array_push($this->jsArray, 'bug/js/edit.js'); 
-        $this->view->js = $this->jsArray;
+        $this->view->js = $this->jsArray;          
         $this->view->render('bug/edit', true);
+        if ($id !== 0)
+        {
+            echo '<script type="text/javascript">', 'getBugByID('. $id . ');', '</script>';
+        }
     }
     
     function listBug()
     {
+        array_push($this->jsArray, 'bug/js/list.js');
+        $this->view->js = $this->jsArray;
         $this->view->render('bug/list', true);
     }
     
@@ -61,9 +67,9 @@ class Bug extends Controller
         $this->model->ajaxUpdate();
     }
 
-    function ajaxDelete()
+    function ajaxDelete($bugID)
     {
-        $this->model->ajaxDelete();
+        $this->model->ajaxDelete($bugID);
     }
     
     function ajaxGetArea($projectID)
@@ -79,6 +85,11 @@ class Bug extends Controller
     function ajaxGetBugByID($bugID)
     {
         $this->model->ajaxGetBugByID($bugID);
+    }
+    
+    function ajaxGetList($projectID, $assignedTo, $status)
+    {
+        $this->model->ajaxGetList($projectID, $assignedTo, $status);
     }
  }
 

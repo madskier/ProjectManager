@@ -96,11 +96,38 @@ class Bug_Model extends Model
         echo json_encode($data);
     }
     
-
-    
-    function ajaxDelete()
+    function ajaxGetList($projectID, $assignedTo, $status)
     {
+        $sql = 'SELECT bugreport.id, bugreport.name, bugreport.status, employee.name AS assigned_to FROM bugreport INNER JOIN employee ON bugreport.assigned_to = employee.id WHERE bugreport.id > 0';        
+                
+        if ($projectID > 0)
+        {
+            $sql .= ' AND bugreport.project = ' . (string)$projectID;
+        }
         
+        if ($assignedTo > 0)
+        {
+            $sql .= ' AND bugreport.assigned_to = ' . (string)$assignedTo;
+        }
+        
+        if ($status != 0)
+        {
+            $sql .= ' AND bugreport.status = ' . $status;
+        }
+        
+        $sql .= ' ORDER BY bugreport.id';
+        
+        $sth = $this->db->prepare($sql);
+        $sth->setFetchMode(PDO::FETCH_ASSOC);
+        $sth->execute();
+        $data = $sth->fetchAll(); 
+        echo json_encode($data);
+    }
+    
+    function ajaxDelete($id)
+    {
+        $sth = $this->db->prepare('DELETE FROM bugreport WHERE id = :id');
+        $sth->execute(array(':id' => $id));
     }    
 }
 

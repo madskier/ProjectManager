@@ -6,7 +6,7 @@ class View
     {
         
     }
-    
+
     public function render($name, $showHeader = true)
     {
         if ($showHeader)

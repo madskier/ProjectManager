@@ -48,7 +48,7 @@ class Bootstrap
         {
             if (method_exists($controller, $url[1]))
             {
-                $controller->{$url[1]}($url[2]);
+                $this->handleParameters($controller, $url);
             }
             else
             {
@@ -80,5 +80,22 @@ class Bootstrap
         $controller = new Error();
         $controller->index(null);
         return false;
+    }
+    
+    function handleParameters($controller, $url)
+    {
+        if(isset($url[5]))
+        {
+            $controller->{$url[1]}($url[2], $url[3], $url[4], $url[5]);
+        } else if (isset($url[4]))
+        {
+            $controller->{$url[1]}($url[2], $url[3], $url[4]);
+        } else if (isset($url[3]))
+        {
+            $controller->{$url[1]}($url[2], $url[3]);
+        } else if (isset($url[2]))
+        {
+            $controller->{$url[1]}($url[2]);
+        }
     }
 }
