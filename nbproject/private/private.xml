@@ -2,6 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/xampp/htdocs/ProjectManager/views/dashboard/js/default.js</file>
+            <file>file:/C:/xampp/htdocs/ProjectManager/controllers/changerequest.php</file>
+            <file>file:/C:/xampp/htdocs/ProjectManager/views/changerequest/edit.php</file>
+            <file>file:/C:/xampp/htdocs/ProjectManager/models/changerequest_model.php</file>
+            <file>file:/C:/xampp/htdocs/ProjectManager/models/index_model.php</file>
+            <file>file:/C:/xampp/htdocs/ProjectManager/views/changerequest/js/list.js</file>
+            <file>file:/C:/xampp/htdocs/ProjectManager/styles/listTable.css</file>
+            <file>file:/C:/xampp/htdocs/ProjectManager/styles/main.css</file>
+            <file>file:/C:/xampp/htdocs/ProjectManager/models/bug_model.php</file>
+            <file>file:/C:/xampp/htdocs/ProjectManager/views/changerequest/list.php</file>
+            <file>file:/C:/xampp/htdocs/ProjectManager/views/changerequest/js/default.js</file>
+        </group>
     </open-files>
 </project-private>

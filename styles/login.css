@@ -1,47 +1,230 @@
+/* ========== GENERAL ========== */
+/* ============================= */
+
+body
+{
+    background-color: #F2F2F2;
+}
+
 .center
 {
-    position:relative;
-    
+    //position:relative;   
     margin-left: auto;
     margin-right: auto;
-    width: 1200px;   
+    width: 100%;   
     text-align:center;
-}
-
-#formDiv
-{       
-    top: 100px;
-    height: 100%;
-}
-
-tr, td
-{
-    height: 30px;
-    text-align: center;
-}
-
-td
-{
-    position: relative;
-    left: 50%;
-    transform: translate(-50%, 0%)
-}
-
-.cell
-{
-    left: 20%;
-    margin: 0px;
-}
-
-table, #txtUsername, #txtPassword, #submitButton
-{
-    margin-left: auto;
-    margin-right: auto;
 }
 
 #spPageTitle
 {
     height:50px;
+}
+
+/* ========== FONTS ========== */
+/* =========================== */
+
+.font
+{
+    font-family: Arial, "Arial", Georgia, serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #CD3695;
+    margin-bottom: 25px;
+}
+
+.titleFont
+{
+    font-family: 'cubic';
+    font-size: 64px;
+    font-weight: normal;
+    color: #CD3695;
+    margin-bottom: -40px;
+    margin-top: 10px;
+}
+
+/* ========== LOGIN FORM ========== */
+/* ================================ */
+
+input[type="text"], input[type="password"], input[type="email"]
+{ 
+    background: white;
+    border: 2px #DDD;    
+    box-shadow: 0 0 8px #333;
+    color: #666;    
+    padding: 5px 10px;
+    outline: none;
+    height: 30px;    
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    width: 180px;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus
+{
+    border: 2px #FF0080;    
+    box-shadow: 0 0 12px #FF0080;
+}
+
+#submitButton, button
+{
+    background-color: #CD3695;
+    border: none;
+    color: white;
+    height: 35px;
+    width: 180px;
+    margin-bottom: 10px;    
+}
+
+#submitButton:hover, button:hover{
+    background-color: #FF0080;
+    cursor:pointer;
+}
+
+#formDiv
+{       
+    top: 0px;    
+}
+
+#fLogin, #fSignUp
+{
+    width: 100%;
+    margin: 0 auto;
+}
+
+#btnForgotUser
+{
+    margin-top: 15px;
+}
+
+#btnSignUp, #btnLogin
+{
+    margin-top: 35px;
+}
+
+/* ========== HEX STYLES ========== */
+/* ================================ */
+
+.hex
+{ 
+    margin-bottom: -60px;
+    position: relative;
+    display: inline-block;
+}
+
+.topHex{
+    width: 0;
+    border-bottom: 65px solid #696969;
+    border-left: 112px solid transparent;
+    border-right: 112px solid transparent;
+    margin: 0 auto;
+}
+
+.middleHex
+{
+    width: 224px;
+    height: 115px;
+    background-color: #696969;
+    border: none;
+    margin: 0 auto;
+}
+
+.bottomHex{
+    width: 0;
+    border-top: 65px solid #696969;
+    border-left: 112px solid transparent;
+    border-right: 112px solid transparent;
+    margin: 0 auto;
+}
+
+.hex-row
+{
+    clear: left; 
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+
+.hex-row.even
+{
+    position: relative;    
+}
+
+.rightHex
+{       
+    top: -25px;    
+}
+
+.rightHex.signupmobile
+{
+    top: -45px;
+}
+
+/* ========== SKINNY SCREENS ========== */
+/* ==================================== */
+
+@media screen and (max-width: 600px)
+{
+    .topHex, .bottomHex
+    {
+        display: none;
+    }
+    
+    .middleHex
+    {       
+        width: 100%;
+        margin: 0 auto;       
+        background: none;        
+    }
+    
+    .hex-row.even
+    {
+        position: relative;
+        top: 60px;
+        right: 0px;
+    }
+    
+    .hex-row
+    {
+        text-align: center;
+    }
+    
+    .rightHex
+    {
+        position: relative;
+        left: 0px;
+        top: 20px;
+    }
+    
+    .rightHex.signupmobile
+    {
+        top: 60px;
+    }
+    
+    .titleFont
+    {
+        font-size: 48px;
+        margin-bottom: -25px;
+    }
+    
+    .font{
+        font-size: 16px;
+    }
+    
+    #btnForgotUser
+    {
+        margin-top: 10px;
+    }
+    
+    #btnSignUp
+    {
+        margin-top: 25px;
+    }
+    
+    #btnLogin
+    {
+        margin-top: 10px;
+    }
 }
 
 

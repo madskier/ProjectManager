@@ -1,15 +1,15 @@
-label, form, #divReqSearch
+label, form, #divAssetSearch
 {
     position: relative;
     left: 6%;
 }
 
-#pgReqSearch
+#pgAssetSearch
 {
     left: 0;
 }
 
-#txtTitle
+input[type="text"]
 {   
     width: 100%;
     height: 20px;
@@ -21,7 +21,7 @@ textarea
     height: 125px;
 }
 
-select, input[type="number"], input[type="text"]
+select
 {
     height: 20px;
 }
@@ -37,17 +37,18 @@ input[type="submit"], button
     text-align: center;
 }
 
-#btnSubmit
+#btnSubmit, #btnAddTitle
 {
     margin-top: 25px;
 }
 
 /*========== TABLE STRUCTURE ==========*/
 /*=====================================*/
-
 td
 {
     width: 100px;
     padding-bottom: 10px;
     padding-right: 15px;
 }
+
+

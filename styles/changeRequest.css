@@ -1,145 +1,59 @@
-#lblTitle
+label, form, #divCRSearch
 {
-    position: absolute;
-    left: 20px;
-    top: 155px;
-    width: 85px;
-    height: 16px;
+    position: relative;
+    left: 6%;
+}
+
+#pgCRSearch
+{
+    left: 0;
 }
 
 #txtTitle
-{
-    position: absolute;
-    left: 150px;
-    top: 155px;
-    width: 50%;
-    height: 22px;
-    z-index: 4;
+{   
+    width: 100%;
+    height: 20px;
 }
 
-#lblDescription
-{
-    position: absolute;
-    left: 20px;
-    top: 240px;
-    width: 120px;
-    height: 16px;
+textarea
+{    
+    width: 100%;
+    height: 125px;
 }
 
-#txtaDescription
+#txtTime
 {
-    position: absolute;
-    left: 150px;
-    top: 200px;
-    width: 50%;
-    height: 106px;
-    z-index: 6;
+    width: 100%;    
 }
 
-#lblProject
+#mlReqMap
 {
-    position: absolute;
-    left: 20px;
-    top: 330px;
-    width: 88px;
-    height: 21px;
+    width: 100%;
+    height: 100px;
 }
 
-#ddProject
+select, input[type="number"], input[type="text"]
 {
-    position: absolute;
-    left: 150px;
-    top: 330px;
-    width: 250px;
-    height: 22px;
-    z-index: 14;
+    height: 20px;
 }
 
-#lblArea
+input[type="submit"], button
 {
-    position: absolute;
-    left: 20px;
-    top: 370px;
-    width: 120px;
-    height: 16px;
-}
-
-#ddArea
-{
-    position: absolute;
-    left: 150px;
-    top: 370px;
-    width: 250px;
-    height: 22px;
-    z-index: 8;
-}
-
-#lblStatus
-{
-    position: absolute;
-    left: 20px;
-    top: 440px;
-    width: 37px;
-    height: 16px;
-}
-
-#ddStatus
-{
-    position: absolute;
-    left: 150px;
-    top: 440px;
-    width: 250px;
-    height: 22px;
-    z-index: 12;
-}
-
-#lblPriority
-{
-    position: absolute;
-    left: 20px;
-    top: 480px;
-    width: 72px;
-    height: 23px;
-}
-
-#ddPriority
-{
-    position: absolute;
-    left: 150px;
-    top: 480px;
-    width: 250px;
-    height: 22px;
-    z-index: 15;
-}
-
-#lblAssignedTo
-{
-    position: absolute;
-    left: 20px;
-    top: 520px;
-    width: 86px;
-    height: 21px;
-}
-
-#ddAssignedTo
-{
-    position: absolute;
-    left: 150px;
-    top: 520px;
-    width: 250px;
-    height: 22px;
-    z-index: 16;
-}
-
-#btnSubmit
-{
-    position: absolute;
-    top: 560px;
-    left: 150px;
+   display: block;
+   margin: 0 auto;   
 }
 
 .divCenter
 {
     text-align: center;
+}
+
+/*========== TABLE STRUCTURE ==========*/
+/*=====================================*/
+td
+{
+    width: 100px;
+    padding-bottom: 10px;
+    padding-right: 15px;
 }
 

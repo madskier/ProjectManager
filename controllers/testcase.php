@@ -6,7 +6,8 @@
  * @author nmarrs
  */
 class Testcase extends Controller
-{    
+{   
+    private $jsArray = array('testcase/js/default.js');
     function __construct()
     {
         parent::__construct();
@@ -28,17 +29,38 @@ class Testcase extends Controller
     
     function create()
     {
+        array_push($this->jsArray, 'testcase/js/create.js'); 
+        $this->view->js = $this->jsArray;
         $this->view->render('testcase/create', true);
     }
     
-    function edit()
+    function edit($id)
     {
+        array_push($this->jsArray, 'testcase/js/edit.js'); 
+        $this->view->js = $this->jsArray;
         $this->view->render('testcase/edit', true);
+        
+        if ($id !== 0)
+        {
+            echo '<script type="text/javascript">', 'getTCByID('. $id . ');', '</script>';
+        }
     }
     
     function listTC()
     {
+        array_push($this->jsArray, 'testcase/js/list.js'); 
+        $this->view->js = $this->jsArray;
         $this->view->render('testcase/list', true);
+    }
+    
+    function view($id)
+    {
+        $this->view->js = $this->jsArray;
+        $this->view->render('testcase/view', true);
+        if ($id !== 0)
+        {
+            echo '<script type="text/javascript">', 'getTCByID('. $id . ');', '</script>';
+        }
     }
     
     function logout()
@@ -51,6 +73,31 @@ class Testcase extends Controller
     function ajaxInsert()
     {
         $this->model->ajaxInsert();
+    }
+    
+    function ajaxUpdate()
+    {
+        $this->model->ajaxUpdate();
+    }
+    
+    function ajaxDelete($id)
+    {
+        $this->model->ajaxDelete($id);
+    }
+    
+    function ajaxGetTCsByProject($projectID)
+    {
+        $this->model->ajaxGetTCsByProject($projectID);
+    }
+    
+    function ajaxGetTCByID($tcID)
+    {
+        $this->model->ajaxGetTCByID($tcID);
+    }
+    
+    function ajaxGetList($projectID, $assignedTo, $status)
+    {
+        $this->model->ajaxGetList($projectID, $assignedTo, $status);
     }
 }
 

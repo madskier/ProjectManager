@@ -14,16 +14,22 @@
     </select>
 </div>
 
-<table id="tbBugList">
+<table id="tbBugList">    
+    <colgroup>
+        <col class="colID">
+        <col class="colName">
+        <col class="colStatus">
+        <col class="colUser">
+    </colgroup>
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Bug Title</th>
-            <th>Status</th>
-            <th>Assigned To</th>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th scope="col">ID</th>
+            <th scope="col">Bug Title</th>
+            <th scope="col">Status</th>
+            <th scope="col">Assigned To</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
     </thead>
     

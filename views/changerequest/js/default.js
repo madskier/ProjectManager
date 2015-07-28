@@ -116,8 +116,70 @@ function getCRByID(crID)
         getStatus(result.status, null);
         getPriority(result.priority, null);
         getEmployee(result.assignedToID, null);
+        $('#txtaApproach').val(result.approach);
+        $('#txtaQuestions').val(result.question);
+        $('#txtTime').val(result.time);
+        getTimeInterval(result.interval, null);
+        getExistingReqs(crID, result.projectID, null);
         $('#hdnID').val(crID);
     });
+}
+
+function getTimeInterval(currInterval, fieldName)
+{
+     if (fieldName === null)
+    {
+        fieldName = '#ddTime';
+    }
+
+    $(fieldName).find('option').remove().end();
+    $(fieldName).append('<option value="Hours">Hours</option>');
+    $(fieldName).append('<option value="Days">Days</option>');
+    $(fieldName).append('<option value="Weeks">Weeks</option>');
+    
+    if (currInterval !== null)
+    {
+        $(fieldName).val(currInterval).attr('selected', true);
+    }
+}
+
+function getReqsAndArea(projectID)
+{
+    getArea(projectID, null, null);
+    getReqsByProject(projectID, null);
+}
+
+function getReqsByProject(projectID, fieldName)
+{
+    if (fieldName === null)
+    {
+        fieldName = '#mlReqMap';
+    }
+    var url = 'http://localhost:80/ProjectManager/requirement/ajaxGetReqsByProject/' + projectID;
+    $.get(url, function(result){
+        $(fieldName).find('option').remove().end();
+        $(fieldName).append(result);      
+    });
+}
+
+function getExistingReqs(crID, projectID, fieldName)
+{
+    if (fieldName === null)
+    {
+        fieldName = '#mlReqMap';
+    }
+    
+    getReqsByProject(projectID, fieldName);
+    
+    var url = 'http://localhost:80/ProjectManager/changerequest/ajaxGetReqsLinkedCR/' + crID;
+    
+    $.getJSON(url, function(result){
+                
+        if (result !== null)
+        {            
+            $(fieldName).val(result).prop('selected', true);          
+        }
+    });   
 }
 
 

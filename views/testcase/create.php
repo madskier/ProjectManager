@@ -1,10 +1,11 @@
-<form id="fCreateTestCase" name="fCreateTestCase" method="post" enctype="application/x-www-form-urlencoded" action="">
+<LINK href="<?php echo URL; ?>styles/testcase.css" rel="stylesheet" type="text/css">
+<form id="fCreateTC" name="fCreateTC" method="post" enctype="application/x-www-form-urlencoded" action="<?php echo URL; ?>testcase/ajaxInsert/">
     <label id="lblTitle" for="txtTitle">Name</label>
     <input type="text" id="txtTitle" name="txtTitle" />
     <label id="lblDescription" for="txtaDescription">Description</label>
     <textarea id="txtaDescription" name="txtaDescription" cols="1" rows="1"></textarea>
     <label id="lblProject" for="ddProject">Project</label>
-    <select id="ddProject" name="ddProject">
+    <select id="ddProject" name="ddProject" onchange="getArea(this.value, null, null);">
         <option value="" selected>Select a Project</option>
     </select>
     <label id="lblArea" for="ddArea">Area</label>
@@ -13,11 +14,6 @@
     </select>
     <label id="lblStatus" for="ddStatus">Status</label>
     <select id="ddStatus" name="ddStatus">
-        <option value="" selected>Select a Status</option>
-        <option value="In Design">In Design</option>
-        <option value="Ready">Ready</option>
-        <option value="Tested">Tested</option>
-        <option value="Closed">Closed</option>
     </select>
     <label id="lblRepro" for="txtaRepro">Reproduction Steps</label>
     <textarea id="txtaRepro" name="txtaRepro" cols="" rows=""></textarea>

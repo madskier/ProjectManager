@@ -17,9 +17,7 @@ class Changerequest extends Controller
         if ($loggedIn == false)
         {
             $this->logout();
-        }
-        
-        $this->view->js = array('changerequest/js/default.js');
+        }       
     }
     
     function index()
@@ -98,6 +96,11 @@ class Changerequest extends Controller
     function ajaxGetList($projectID, $assignedTo, $status)
     {
         $this->model->ajaxGetList($projectID, $assignedTo, $status);
+    }
+    
+    function ajaxGetReqsLinkedCR($crID)
+    {
+        $this->model->ajaxGetReqsLinkedCR($crID);
     }
 }
 

@@ -38,7 +38,7 @@ function getList()
     {       
         for (var i = 0; i < result.length; i++)
         {
-            $('#tbReqList').append('<tr class="main"><td>' + result[i].id + '</td><td>' + result[i].name + '</td><td>' + result[i].area_affected + '</td><td>' + result[i].last_modified_by + '</td><td><a href="http://localhost:80/ProjectManager/requirement/edit/'+ result[i].id +'">Edit</a></td><td><a href="http://localhost:80/ProjectManager/requirement/view/'+ result[i].id +'">View Details</a></td><td><a class="btnDel" rel="'+ result[i].id +'" href="#">Delete</a>'+'</td></tr>');
+            $('#tbReqList').append('<tr class="main"><td class="firstCol">' + result[i].id + '</td><td>' + result[i].name + '</td><td>' + result[i].area_affected + '</td><td>' + result[i].last_modified_by + '</td><td class="tdIcon"><a href="http://localhost:80/ProjectManager/requirement/edit/'+ result[i].id +'"><img class="editIcon" src="http://localhost:80/ProjectManager/images/editIcon.png" alt="Edit"/></a></td><td class="tdIcon"><a href="http://localhost:80/ProjectManager/requirement/view/'+ result[i].id +'"><img class="detailsIcon" src="http://localhost:80/ProjectManager/images/detailsIcon.png" alt="View Details"/></a></td><td class="tdIcon"><a class="btnDel" rel="'+ result[i].id +'" href="#"><img class="deleteIcon" src="http://localhost:80/ProjectManager/images/deleteIcon.png" alt="Delete"/></a></td></tr>');
         }  
         
         $('.btnDel').click(function(){

@@ -63,5 +63,32 @@ class Index_Model extends Model
         }
         unset($value);
     }
+    
+    function ajaxGetList($activeOnly)
+    {
+        $username = Session::get('username');
+        $sth1 = $this->db->prepare('SELECT id FROM Employee WHERE username = :username');
+        $sth1->execute(array(':username' => $username));
+        
+        $userID = $sth1->fetch();
+        
+        if ($activeOnly == 0)
+        {
+            $sql = 'SELECT bugreport.id, bugreport.name, bugreport.status, bugreport.priority, "bug" AS type FROM bugreport WHERE assigned_to = :userID UNION SELECT changerequest.id, changerequest.name, changerequest.status, changerequest.priority, "changerequest" AS type FROM changerequest WHERE assigned_to = :userID UNION SELECT testcase.id, testcase.name, testcase.status, "" AS priority, "testcase" AS type FROM testcase WHERE assigned_to = :userID';        
+        }
+        else 
+        {
+            $sql = 'SELECT bugreport.id, bugreport.name, bugreport.status, bugreport.priority, "bug" AS type FROM bugreport WHERE assigned_to = :userID AND bugreport.status != "Closed" UNION SELECT changerequest.id, changerequest.name, changerequest.status, changerequest.priority, "changerequest" AS type FROM changerequest WHERE assigned_to = :userID AND changerequest.status != "Closed" UNION SELECT testcase.id, testcase.name, testcase.status, "" AS priority, "testcase" AS type FROM testcase WHERE assigned_to = :userID AND testcase.status != "Closed"';
+        }
+        
+        $sql .= ' ORDER BY type';
+        
+        $sth = $this->db->prepare($sql);
+        $sth->setFetchMode(PDO::FETCH_ASSOC);
+        $sth->execute(array(':userID' => $userID[0]));
+        $data = $sth->fetchAll();
+        
+        echo json_encode($data);  
+    }
 }
 

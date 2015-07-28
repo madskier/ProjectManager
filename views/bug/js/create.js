@@ -10,7 +10,7 @@ $(function(){
          
          $.post(url, data, function(callback){
              alert("Bug Successfully Created");
-             document.location.href = "http://localhost:80/ProjectManager/requirement/listBug";
+             document.location.href = "http://localhost:80/ProjectManager/bug/listBug";
          });
          return false;
     });

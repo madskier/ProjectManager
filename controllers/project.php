@@ -31,9 +31,18 @@ class Project extends Controller
         $this->view->render('project/create', true);
     }
     
-    function edit()
+    function edit($id)
     {
         $this->view->render('project/edit', true);
+        if ($id !== 0)
+        {
+            echo '<script type="text/javascript">', 'getProjectByID('. $id . ');', '</script>';
+        }
+    }
+    
+    function listProject()
+    {
+        $this->view->render('project/list', true);
     }
        
     function logout()

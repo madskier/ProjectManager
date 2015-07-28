@@ -1,29 +1,36 @@
-<LINK href="<?php echo URL; ?>styles/requirement.css" rel="stylesheet" type="text/css">
+<LINK href="<?php echo URL; ?>styles/listTable.css" rel="stylesheet" type="text/css">
 <div id="divReqSearch">
-    <label id="lblProjectSearch">Search for a Requirement by Project</label>
-    <select id="ddProjectList" onchange="getListAndArea(this.value)">
+    <p id="pgReqSearch">Search List By</p>
+    <label id="lblProjectSearch" for="ddProjectList">Project</label>
+    <select id="ddProjectList" class="searchParam" onchange="getListAndArea(this.value)">
         <option value="" selected>Select a Project </option>
     </select>    
-    <label id="lblAreaList">Search for a Requirement by Area</label>
-    <select id="ddAreaList" onchange="getList()">
+    <label id="lblAreaList" for="ddAreaList">Area</label>
+    <select id="ddAreaList" class="searchParam" onchange="getList()">
         <option value="" selected>Select an Area</option>
     </select>
-    <label id="lblLMBSearch">Search for a Requirement by User</label>
-    <select id="ddLMBList" onchange="getList()">
+    <label id="lblLMBSearch" for="ddLMBList">Edited By</label>
+    <select id="ddLMBList" class="searchParam" onchange="getList()">
         <option value="" selected>Select a User</option>
     </select>    
 </div>
-
+<p id="pTableTitleReq">Requirement List</p>
 <table id="tbReqList">
+     <colgroup>
+        <col class="colID" />
+        <col class="colName" />
+        <col class="colArea" />
+        <col class="colUser" />
+    </colgroup>
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Requirement Title</th>
-            <th>Area</th>
-            <th>Last Modified By</th>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th scope="col" class="firstCol">ID</th>
+            <th scope="col">Requirement Title</th>
+            <th scope="col">Area</th>
+            <th scope="col">Last Modified By</th>
+            <th scope="col" class="tdIcon"></th>
+            <th scope="col" class="tdIcon"></th>
+            <th scope="col" class="tdIcon"></th>
         </tr>
     </thead>    
 </table>

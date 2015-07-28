@@ -6,29 +6,32 @@
  * @author nmarrs
  */
 class Index extends Controller
-{    
+{   
+    private $jsArray = array('index/js/default.js');
     function __construct()
     {
-        parent::__construct();        
+        parent::__construct();
+        Session::startSession();
     }
     
     function index()
-    {        
-        $this->view->render('index/index', false);        
-    }
-        
-    function signup()
     {
-        $this->view->render('index/signup', false);
-    }
+        array_push($this->jsArray, 'index/js/login.js'); 
+        $this->view->js = $this->jsArray;
+        $this->view->render('index/index', false);        
+    }   
     
     function forgotUsername()
     {
+        array_push($this->jsArray, 'index/js/login.js'); 
+        $this->view->js = $this->jsArray;
         $this->view->render('index/forgotUsername', false);
     }
     
     function forgotPassword()
     {
+        array_push($this->jsArray, 'index/js/login.js'); 
+        $this->view->js = $this->jsArray;
         $this->view->render('index/forgotPassword', false);
     }
     
@@ -50,5 +53,10 @@ class Index extends Controller
     function ajaxGetUser()
     {
         $this->model->ajaxGetUser();
+    }    
+        
+    function ajaxGetList($activeOnly)
+    {
+        $this->model->ajaxGetList($activeOnly);
     }
 }

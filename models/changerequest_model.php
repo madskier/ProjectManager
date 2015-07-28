@@ -8,17 +8,25 @@ class Changerequest_Model extends Model
     
     function sendEmail($user, $name, $submittedBy)
     {
-        $msg = $submittedBy . "has assigned a Bug to you. \r\n Please resolve the issue promptly. \r\n\r\n The Bug Title is " . $name . ".";
-        $subject = "Bug assigned to you";
-        
         $sth = $this->db->prepare('SELECT email FROM employee WHERE id = :assignedTo');
         $sth->execute(array(':assignedTo' => $user));
         
-        $sth2 = $this->db->prepare('SELECT email FROM employee WHERE id = 1');
-        $sth2->execute();
+        $sth2 = $this->db->prepare('SELECT email, name FROM employee WHERE id = :submittedBy');
+        $sth2->execute(array(':submittedBy' => $submittedBy));
+        $data = $sth2->fetch();
+        
+        foreach($data as $value)
+        {           
+            $submittedByName = $value['name'];
+            $fromEmail = $value['email'];
+        }
+        unset($value);    
         
         $toEmail = $sth->fetch();
         $fromEmail = $sth2->fetch();
+        $submittedByName = $sth3->fetch();
+        $msg = $submittedByName . "has assigned a Change Request to you. \r\n Please take the appropriate action for the CR. \r\n\r\n The Change Request Title is " . $name . ".";
+        $subject = "CR assigned to you";
         $headers = "From: " . $fromEmail . "\r\n" .
                    "Reply-To: " . $fromEmail . "\r\n" .
                    "X-Mailer: PHP/" . phpversion();
@@ -35,17 +43,63 @@ class Changerequest_Model extends Model
         $priority = strip_tags(filter_input(INPUT_POST, 'ddPriority'));
         $project = strip_tags(filter_input(INPUT_POST, 'ddProject'));        
         $status = strip_tags(filter_input(INPUT_POST, 'ddStatus'));
+        $approach = strip_tags(filter_input(INPUT_POST, 'txtaApproach'));
+        $time = strip_tags(filter_input(INPUT_POST, 'txtTime'));
+        $interval = strip_tags(filter_input(INPUT_POST, 'ddTime'));
+        $question = strip_tags(filter_input(INPUT_POST, 'txtaQuestions'));
         
-        $username = Session::get('username');
-        $sth1 = $this->db->prepare('SELECT id FROM Employee WHERE username = :username');
-        $sth1->execute(array(':username' => $username));
+        $reqsToMap = $_POST['mlReqMap'];       
         
-        $submitted_by = $sth1->fetch();
+        try
+        {
+            $username = Session::get('username');
+            $sth1 = $this->db->prepare('SELECT id FROM Employee WHERE username = :username');
+            $sth1->execute(array(':username' => $username));
+
+            $submitted_by = $sth1->fetch();
+        }
+        catch (PDOException $e)
+        {
+            echo $e->getMessage(); 
+        }
         
-        $sth = $this->db->prepare('INSERT INTO changerequest (area_affected, assigned_to, description, name, priority, project, status) VALUES (:area, :assignedTo, :description, :name, :priority, :project, :status)');
-        $sth->execute(array(':area' => $area, ':assignedTo' => $assigned_to, ':description' => $description, ':name' => $name, ':priority' => $priority, ':project' => $project, ':status' => $status));
+        try
+        {
+            $sth = $this->db->prepare('INSERT INTO changerequest (approach, area_affected, assigned_to, complete_time, description, name, priority, project, question, status, time_interval) VALUES (:approach, :area, :assignedTo, :time, :description, :name, :priority, :project, :question, :status, :interval)');
+            
+            $sth->execute(array(':approach' => $approach, ':area' => $area, ':assignedTo' => $assigned_to, ':time' => $time ,':description' => $description, ':name' => $name, ':priority' => $priority, ':project' => $project, ':question' => $question ,':status' => $status, ':interval' => $interval));
         
-        sendEmail($assigned_to, $name, $submitted_by); 
+            $sth2 = $this->db->prepare('SELECT id FROM changerequest ORDER BY id desc limit 1');
+            $sth2->execute();
+            $crID = $sth2->fetch();
+        }
+        catch (PDOException $e)
+        {
+          echo $e->getMessage();   
+        }       
+        
+        if (is_array($reqsToMap) || is_object($reqsToMap))
+        {            
+            foreach($reqsToMap as $reqID)
+            {
+                strip_tags($reqID);                
+                
+                try
+                {
+                    $sth = $this->db->prepare('INSERT INTO crreqmap (cr_id, req_id) VALUES (:crID, :reqID)');
+                    $sth->execute(array(':crID' => $crID[0], ':reqID' => $reqID));
+                }
+                catch (PDOException $e)
+                {
+                    echo $e->getMessage();
+                }
+            }            
+        }
+        
+        if ($assigned_to)
+        {
+            sendEmail($assigned_to, $name, $submitted_by); 
+        }
     }
     
     function ajaxUpdate()
@@ -57,17 +111,54 @@ class Changerequest_Model extends Model
         $priority = strip_tags(filter_input(INPUT_POST, 'ddPriority'));
         $project = strip_tags(filter_input(INPUT_POST, 'ddProject'));     
         $status = strip_tags(filter_input(INPUT_POST, 'ddStatus'));
+        $approach = strip_tags(filter_input(INPUT_POST, 'txtaApproach'));
+        $time = strip_tags(filter_input(INPUT_POST, 'txtTime'));
+        $interval = strip_tags(filter_input(INPUT_POST, 'ddTime'));
+        $question = strip_tags(filter_input(INPUT_POST, 'txtaQuestions'));
         $id = strip_tags(filter_input(INPUT_POST, 'hdnID'));
         
-        $username = Session::get('username');
-        $sth1 = $this->db->prepare('SELECT id FROM Employee WHERE username = :username');
-        $sth1->execute(array(':username' => $username));
+        $reqsToMap = $_POST['mlReqMap'];    
         
-        $submitted_by = $sth1->fetch();
+        try
+        {
+            $username = Session::get('username');
+            $sth1 = $this->db->prepare('SELECT id FROM Employee WHERE username = :username');
+            $sth1->execute(array(':username' => $username));
+
+            $submitted_by = $sth1->fetch();
+        }
+        catch (PDOException $e)
+        {
+            echo $e->getMessage(); 
+        }
         
-        $sth = $this->db->prepare('UPDATE changerequest SET area_affected = :area, assigned_to = :assignedTo, description = :description, name = :name, priority = :priority, project = :project, status = :status WHERE id = :id');
-        $sth->execute(array(':area' => $area, ':assignedTo' => $assigned_to, ':description' => $description, ':name' => $name, ':priority' => $priority, ':project' => $project, ':status' => $status, ':id' => $id));
+        try
+        {
+            $sth = $this->db->prepare('UPDATE changerequest SET approach = :approach, area_affected = :area, assigned_to = :assignedTo, complete_time = :time, description = :description, name = :name, priority = :priority, project = :project, question = :question, status = :status, time_interval = :interval WHERE id = :id');
+            $sth->execute(array(':approach' => $approach,':area' => $area, ':assignedTo' => $assigned_to, ':time' => $time,':description' => $description, ':name' => $name, ':priority' => $priority, ':project' => $project, ':question' => $question, ':status' => $status, ':interval' => $interval, ':id' => $id));
+        }
+        catch (PDOException $e)
+        {
+            echo $e->getMessage(); 
+        }
         
+        if (is_array($reqsToMap) || is_object($reqsToMap))
+        {            
+            foreach($reqsToMap as $reqID)
+            {
+                strip_tags($reqID);                
+                
+                try
+                {
+                    $sth = $this->db->prepare('INSERT IGNORE INTO crreqmap (cr_id, req_id) VALUES (:crID, :reqID)');
+                    $sth->execute(array(':crID' => $id, ':reqID' => $reqID));
+                }
+                catch (PDOException $e)
+                {
+                    echo $e->getMessage();
+                }
+            }            
+        }
         sendEmail($assigned_to, $name, $submitted_by);
     }
     
@@ -93,29 +184,48 @@ class Changerequest_Model extends Model
     
     function ajaxGetCRByID($crID)
     {       
-        $sth = $this->db->prepare('SELECT changerequest.area_affected, changerequest.assigned_to, changerequest.description, changerequest.id, changerequest.name, changerequest.priority, changerequest.project, changerequest.status FROM changerequest WHERE id = :crID');
+        $sth = $this->db->prepare('SELECT changerequest.approach, changerequest.area_affected, changerequest.assigned_to, changerequest.complete_time, changerequest.description, changerequest.id, changerequest.name, changerequest.priority, changerequest.project, changerequest.question, changerequest.status, changerequest.time_interval FROM changerequest WHERE id = :crID');
         $sth->setFetchMode(PDO::FETCH_ASSOC);
         $sth->execute(array(':crID' => $crID));
         $data = $sth->fetchAll();       
         
         foreach($data as $value)
         {            
+            $data["approach"] = $value['approach'];
             $data["areaID"] = $value['area_affected'];            
-            $data["assignedToID"] = $value['assigned_to'];            
+            $data["assignedToID"] = $value['assigned_to'];
+            $data["time"] = $value['complete_time'];
             $data["description"] = $value['description'];
             $data["id"] = $value['id'];
             $data["name"] = $value['name'];
             $data["priority"] = $value['priority'];            
-            $data["projectID"] = $value['project'];            
-            $data["status"] = $value['status'];            
+            $data["projectID"] = $value['project'];
+            $data["question"] = $value['question'];
+            $data["status"] = $value['status'];    
+            $data["interval"] = $value['time_interval'];
         }
         
         echo json_encode($data);
     }
     
+    function ajaxGetReqsLinkedCR($crID)
+    {
+        $sth = $this->db->prepare('SELECT crreqmap.req_id FROM crreqmap WHERE crreqmap.cr_id = :crID');
+        $sth->setFetchMode(PDO::FETCH_ASSOC);
+        $sth->execute(array(':crID' => $crID));
+        $data = $sth->fetchAll();
+        $index = 0;
+        foreach($data as $value)
+        {               
+            $data[$index] = $value['req_id'];
+            $index++;
+        }
+        echo json_encode($data);
+    }
+    
     function ajaxGetList($projectID, $assignedTo, $status)
     {
-        $sql = 'SELECT changerequest.id, changerequest.name, changerequest.status, employee.name AS assigned_to FROM changerequest INNER JOIN employee ON changerequest.assigned_to = employee.id WHERE changerequest.id > 0';        
+        $sql = 'SELECT changerequest.id, changerequest.name, changerequest.status, IFNULL(employee.name, "None") AS assigned_to FROM changerequest LEFT JOIN employee ON changerequest.assigned_to = employee.id WHERE changerequest.id > 0';        
                 
         if ($projectID > 0)
         {

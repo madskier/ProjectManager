@@ -8,18 +8,26 @@ class Bug_Model extends Model
     }
     
     function sendEmail($user, $name, $submittedBy)
-    {
-        $msg = $submittedBy . "has assigned a Bug to you. \r\n Please resolve the issue promptly. \r\n\r\n The Bug Title is " . $name . ".";
-        $subject = "Bug assigned to you";
-        
-        $sth = $this->db->prepare('SELECT email FROM employee WHERE name = :assignedTo');
+    {        
+        $sth = $this->db->prepare('SELECT email FROM employee WHERE id = :assignedTo');
         $sth->execute(array(':assignedTo' => $user));
         
-        $sth2 = $this->db->prepare('SELECT email FROM employee WHERE id = 1');
-        $sth2->execute();
+        $sth2 = $this->db->prepare('SELECT email, name FROM employee WHERE id = :submittedBy');
+        $sth2->execute(array(':submittedBy' => $submittedBy));
+        $data = $sth2->fetch();
+        
+        foreach($data as $value)
+        {           
+            $submittedByName = $value['name'];
+            $fromEmail = $value['email'];
+        }
+        unset($value);    
         
         $toEmail = $sth->fetch();
         $fromEmail = $sth2->fetch();
+        $submittedByName = $sth3->fetch();
+        $msg = $submittedByName . "has assigned a Bug to you. \r\n Please resolve the issue promptly. \r\n\r\n The Bug Title is " . $name . ".";
+        $subject = "Bug assigned to you";
         $headers = "From: " . $fromEmail . "\r\n" .
                    "Reply-To: " . $fromEmail . "\r\n" .
                    "X-Mailer: PHP/" . phpversion();
@@ -39,7 +47,7 @@ class Bug_Model extends Model
         $status = strip_tags(filter_input(INPUT_POST, 'ddStatus'));
         
         $username = Session::get('username');
-        $sth1 = $this->db->prepare('SELECT name FROM Employee WHERE username = :username');
+        $sth1 = $this->db->prepare('SELECT id FROM Employee WHERE username = :username');
         $sth1->execute(array(':username' => $username));
         
         $submitted_by = $sth1->fetch();

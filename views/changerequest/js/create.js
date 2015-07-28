@@ -1,5 +1,5 @@
 $(function(){
-    
+    hideDetail();
     getProject(null, null);    
     getEmployee(null, null);
     
@@ -8,10 +8,34 @@ $(function(){
          var data = $(this).serialize();
          
          $.post(url, data, function(callback){
-             alert("Change Request Successfully Created");
+             
+             if (callback !== "" && callback !== null)
+             {
+                 alert(callback);
+             }
+             else
+             {
+                 alert("Change Request Created Successfully");
+             }
+             
              document.location.href = "http://localhost:80/ProjectManager/changerequest/listCR";
          });
+         
          return false;
     });
 });
+
+function showDetail()
+{
+    $('#tbDetail').show();
+    $('#btnShowDetail').hide();
+    $('#btnSubmit').hide();
+}
+
+function hideDetail()
+{
+    $('#tbDetail').hide();
+    $('#btnShowDetail').show();
+    $('#btnSubmit').show();
+}
 
