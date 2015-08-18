@@ -15,7 +15,7 @@ class Index extends Controller
     }
     
     function index()
-    {
+    {        
         array_push($this->jsArray, 'index/js/login.js'); 
         $this->view->js = $this->jsArray;
         $this->view->render('index/index', false);        
@@ -24,13 +24,15 @@ class Index extends Controller
     function forgotUsername()
     {
         array_push($this->jsArray, 'index/js/login.js'); 
+        array_push($this->jsArray, 'index/js/username.js'); 
         $this->view->js = $this->jsArray;
         $this->view->render('index/forgotUsername', false);
     }
     
     function forgotPassword()
     {
-        array_push($this->jsArray, 'index/js/login.js'); 
+        array_push($this->jsArray, 'index/js/login.js');
+        array_push($this->jsArray, 'index/js/password.js'); 
         $this->view->js = $this->jsArray;
         $this->view->render('index/forgotPassword', false);
     }
@@ -38,6 +40,11 @@ class Index extends Controller
     function doLogin()
     {
         $this->model->doLogin();
+    }
+    
+    function doSignup()
+    {
+        $this->model->doSignup();
     }
     
     function addUser()
@@ -58,5 +65,15 @@ class Index extends Controller
     function ajaxGetList($activeOnly)
     {
         $this->model->ajaxGetList($activeOnly);
+    }
+    
+    function getUsername()
+    {
+        $this->model->getUsername();
+    }
+    
+    function getPassword()
+    {
+        $this->model->getPassword();
     }
 }

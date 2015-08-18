@@ -15,13 +15,7 @@
                  <label id="lblStatus" for="ddStatus">Status</label>
             </td>
             <td>
-                <select id="ddStatus" name="ddStatus">
-                    <option value="Design" selected>Design</option>
-                    <option value="Concept Created">Concept Created</option>
-                    <option value="Ready for Review">Ready for Review</option>
-                    <option value="Finalized and Committed">Finalized and Committed</option>
-                    <option value="In Project">In Project</option>
-                    <option value="Deferred">Deferred</option>
+                <select id="ddStatus" name="ddStatus">                    
                 </select>
             </td>
             <td>

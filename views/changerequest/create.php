@@ -1,6 +1,6 @@
 <LINK href="<?php echo URL; ?>styles/changeRequest.css" rel="stylesheet" type="text/css">
 <p id="pgTitle">Create a New Change Request</p>
-<form id="fCreateCR" name="fCreateCR" method="post" enctype="application/x-www-form-urlencoded" action="<?php echo URL; ?>changerequest/ajaxInsert/">
+<form id="fCreateCR" name="fCreateCR" method="post" enctype="multipart/form-data" action="<?php echo URL; ?>changerequest/ajaxInsert/">
     <table id="tbBasic">
         <tr>
             <td>
@@ -65,9 +65,17 @@
             <td>
                 <label id="lblAssignedTo" for="ddAssignedTo">Assigned To: </label>
             </td>
-            <td colspan="3">
+            <td>
                 <select id="ddAssignedTo" name="ddAssignedTo">
-                    <option value="" selected>Select a User: </option>
+                    <option value="" selected>Select a User</option>
+                </select>
+            </td>
+            <td>
+                <label id="lblRequstedBy" for="ddRequestedBy">Requested By: </label>
+            </td>
+            <td>
+                <select id="ddRequestedBy" name="ddRequestedBy">
+                    <option value="" selected>Select an Informant</option>
                 </select>
             </td>
         </tr>
@@ -119,6 +127,14 @@
             <td colspan="3">
                 <select id="mlReqMap" name="mlReqMap[]" multiple>                    
                 </select>
+            </td>
+        </tr>
+        <tr>            
+            <td>
+                <label id="lblUpload" for="fuLoader">File Upload:</label>
+            </td>
+            <td>
+                <input type="file" id="fuLoader" name="fuLoader"/>
             </td>
         </tr>
         <tr>

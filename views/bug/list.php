@@ -1,36 +1,63 @@
-<LINK href="<?php echo URL; ?>styles/bug.css" rel="stylesheet" type="text/css">
+<LINK href="<?php echo URL; ?>styles/listTable.css" rel="stylesheet" type="text/css">
 <div id="divBugSearch">
-    <label id="lblProjectSearch">Search for a Bug by Project</label>
-    <select id="ddProjectList" onchange="getList()">
+    <p id="pgBugSearch">Search List By</p>
+    <label id="lblProjectSearch">Project</label>
+    <select id="ddProjectList" class="searchParam" onchange="getList(false)">
         <option value="" selected>Select a Project </option>
     </select>
-    <label id="lblAssignedToSearch">Search for a Bug by Assignee</label>
-    <select id="ddAssignedToList" onchange="getList()">
+    <label id="lblAssignedToSearch">Assignee</label>
+    <select id="ddAssignedToList" class="searchParam" onchange="getList(false)">
         <option value="" selected>Select a User</option>
     </select>
-    <label id="lblStatusList">Search for a Bug by Status</label>
-    <select id="ddStatusList" onchange="getList()">
+    <label id="lblStatusList">Status</label>
+    <select id="ddStatusList" class="searchParam" onchange="getList(false)">
         <option value="" selected>Select a Status</option>
     </select>
+    <label id="lblCycleSearch">Cycle</label>
+    <select id="ddCycleList" class="searchParam" onchange="getList(false)">
+        <option value="" selected>Select a Cycle</option>
+    </select>
+    <p id="pgBugExport">Export List</p>
+     <button type="button" id="btnExportExcel" onclick="">Export To Excel</button>
+     <button type="button" id="btnExportWord" onclick="">Export To Word</button>
+     <button type="button" id="btnExportPDF" onclick="">Export To PDF</button>
 </div>
 
-<table id="tbBugList">    
-    <colgroup>
-        <col class="colID">
-        <col class="colName">
-        <col class="colStatus">
-        <col class="colUser">
-    </colgroup>
-    <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Bug Title</th>
-            <th scope="col">Status</th>
-            <th scope="col">Assigned To</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    
-</table>
+<p id="pTableTitleBug">Bug List</p>
+<div class="table-wrapper bug">
+        <div class="wrapper-paging wrapperBug">
+            <ul>
+                <li><a class="paging-back">&lt;</a></li>
+                <li>
+                    <a class="paging-this"><strong>0</strong> of <span>x</span></a>
+                </li>
+                <li><a class="paging-next">&gt;</a></li>             
+            </ul>
+        </div>
+    <div class="wrapper-active">
+        <input type="checkbox" id="cbActive" name="cbActive" onchange="getList(false)">
+        <label id="lblActive" >Show Inactive</label>
+    </div>
+    <div class="wrapper-panel">
+        <table id="tbBugList">    
+            <colgroup>
+                <col class="colID">
+                <col class="colName">
+                <col class="colStatus">
+                <col class="colUser">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th scope="col" class="firstCol">ID</th>
+                    <th scope="col">Bug Title</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Assigned To</th>
+                    <th scope="col" class="tdIcon"></th>
+                    <th scope="col" class="tdIcon"></th>
+                    <th scope="col" class="tdIcon"></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+

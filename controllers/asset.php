@@ -44,6 +44,16 @@ class Asset extends Controller
         }
     }
     
+    function view($id)
+    {
+        $this->view->js = $this->jsArray;
+        $this->view->render('asset/view', true);
+        if ($id !== 0)
+        {
+            echo '<script type="text/javascript">', 'getAssetByID('. $id . ');', '</script>';
+        }
+    }
+    
     function listAsset()
     {
         array_push($this->jsArray, 'asset/js/list.js'); 
@@ -66,6 +76,26 @@ class Asset extends Controller
     function ajaxUpdate()
     {
         $this->model->ajaxUpdate();
+    }
+    
+    function ajaxDelete($id)
+    {
+        $this->model->ajaxDelete($id);
+    }
+    
+    function ajaxGetAssetsByProject($projectID)
+    {
+        $this->model->ajaxGetAssetsByProject($projectID);
+    }
+    
+    function ajaxGetAssetByID($id)
+    {
+        $this->model->ajaxGetAssetByID($id);
+    }
+    
+    function ajaxGetList($projectID, $assignedTo, $status, $type)
+    {
+        $this->model->ajaxGetList($projectID, $assignedTo, $status, $type);
     }
 }
 

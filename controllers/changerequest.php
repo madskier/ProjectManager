@@ -93,9 +93,9 @@ class Changerequest extends Controller
         $this->model->ajaxGetCRByID($crID);
     }
     
-    function ajaxGetList($projectID, $assignedTo, $status)
+    function ajaxGetList($projectID, $assignedTo, $status, $active, $cycle)
     {
-        $this->model->ajaxGetList($projectID, $assignedTo, $status);
+        $this->model->ajaxGetList($projectID, $assignedTo, $status, $active, $cycle);
     }
     
     function ajaxGetReqsLinkedCR($crID)

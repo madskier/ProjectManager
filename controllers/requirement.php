@@ -95,9 +95,9 @@ class Requirement extends Controller
         $this->model->ajaxGetReqByID($reqID);
     }
     
-    function ajaxGetList($projectID, $lastModifiedBy, $area)
+    function ajaxGetList($projectID, $lastModifiedBy, $area, $status, $active)
     {
-        $this->model->ajaxGetList($projectID, $lastModifiedBy, $area);
+        $this->model->ajaxGetList($projectID, $lastModifiedBy, $area, $status, $active);
     }
 }
 

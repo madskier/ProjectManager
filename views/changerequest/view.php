@@ -55,8 +55,16 @@
             <td>
                 <label id="lblAssignedTo" for="ddAssignedTo">Assigned To</label>
             </td>
-            <td colspan="3">
+            <td>
                 <select id="ddAssignedTo" name="ddAssignedTo" disabled>                    
+                </select>
+            </td>
+            <td>
+                <label id="lblRequstedBy" for="ddRequestedBy">Requested By: </label>
+            </td>
+            <td>
+                <select id="ddRequestedBy" name="ddRequestedBy" disabled>
+                    <option value="" selected>Select an Informant</option>
                 </select>
             </td>
         </tr>
@@ -99,7 +107,7 @@
         </tr>
         <tr>
             <td colspan="4">
-                <a id="btnSubmit" href="<?php echo URL; ?>changerequest/listCR">Return To List</a>
+                <a id="btnSubmit" class="aButton" href="<?php echo URL; ?>changerequest/listCR">Return To List</a>
             </td>
         </tr>
     </table>    

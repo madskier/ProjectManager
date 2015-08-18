@@ -28,7 +28,7 @@ textarea
 
 #mlReqMap
 {
-    width: 100%;
+    width: 700px !important;
     height: 100px;
 }
 
@@ -37,7 +37,7 @@ select, input[type="number"], input[type="text"]
     height: 20px;
 }
 
-input[type="submit"], button
+input[type="submit"], button, a
 {
    display: block;
    margin: 0 auto;   
@@ -48,6 +48,26 @@ input[type="submit"], button
     text-align: center;
 }
 
+#btnSubmit, #btnShowDetail
+{
+    margin-top: 25px;
+}
+
+#txtaApproach, #txtaQuestions, #mlReqMap
+{
+    width: 500px;
+}
+
+#ddTime
+{
+    position: relative;
+    left: -200px;
+}
+
+#txtTime
+{
+    width: 350px;
+}
 /*========== TABLE STRUCTURE ==========*/
 /*=====================================*/
 td

@@ -1,7 +1,10 @@
-<LINK href="<?php echo URL; ?>styles/login.css" rel="stylesheet" type="text/css">
+<LINK href="<?php echo URL; ?>styles/login.css" rel="stylesheet" type="text/css" media="screen">
+<link rel="icon" type="image/png" href="<?php echo URL; ?>images/favicon.png">
 <HEADER class="center" lang="en">   
-    <meta charset="UTF-8">    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="<?php echo URL; ?>scripts/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <script src="<?php echo URL; ?>scripts/common.js" type="text/javascript"</script>
     <?php
         if (isset($this->js))
         {
@@ -14,8 +17,9 @@
     <p class="titleFont">codecycle</p>
     <p class="font">Design | Develop | Test | Repeat</p>
 </HEADER>
+<body>
 <div id="formDiv" class="center">
-    <form id="fLogin" name="fLogin" method="post" enctype="application/x-www-form-urlencoded" action="index/doLogin">
+    <form id="fLogin" name="fLogin" method="post" enctype="application/x-www-form-urlencoded" action="<?php echo URL; ?>index/doLogin">
         <div class="hex-row">
             <div class="hex">
                 <div class="topHex"></div>
@@ -30,13 +34,13 @@
                 <div class="hex">
                     <div class="topHex"></div>
                     <div class="middleHex">
-                        <button type="button" id="btnForgotUser" onclick="location.href='<?php echo URL; ?>index/forgotUsername'">Forgot Username</button>
+                        <button type="button" id="btnForgotUser">Forgot Username</button>
                         <button type="button" id="btnForgotPass" onclick="location.href='<?php echo URL; ?>index/forgotPassword'">Forgot Password</button>
                     </div>
                     <div class="bottomHex"></div>
                 </div>
-                <div class="hex rightHex">
-                    <div id="signUpDiv" class="topHex"></div>
+                <div class="hex rightHex signupmobile">
+                    <div class="topHex"></div>
                     <div class="middleHex">
                         <button type="button" id="btnSignUp" onclick="changeLogin()">Sign Up</button>           
                     </div>
@@ -46,7 +50,7 @@
         </div>
 
     </form>
-    <form id="fSignUp" name="fSignUp" method="post" enctype="application/x-www-form-urlencoded" action="index/doSignUp">
+    <form id="fSignUp" name="fSignUp" method="post" enctype="application/x-www-form-urlencoded" action="<?php echo URL; ?>index/doSignUp">
         <div class="hex-row">
             <div class="hex">
                 <div class="topHex"></div>
@@ -67,8 +71,8 @@
                     </div> 
                     <div class="bottomHex"></div>
                 </div>
-                <div class="hex rightHex signupmobile">
-                    <div id="signUpDiv" class="topHex"></div>
+                <div class="hex rightHex signupmobile extra">
+                    <div class="topHex"></div>
                     <div class="middleHex">
                         <button id="btnLogin" onclick="changeSignUp()">Back to Login</button>           
                     </div>
@@ -78,7 +82,6 @@
         </div>               
     </form>    
 </div>
-
-
+</body>
 
 

@@ -36,6 +36,21 @@
     width: 10em;
 }
 
+.colHours
+{
+    width: 5em;
+}
+
+.colCheckbox
+{
+    width: 3em;
+}
+
+.colDate
+{
+    width: 10em;
+}
+
 .firstCol
 {
     padding-left: 10px;
@@ -55,8 +70,7 @@
 table
 {
     border: 1px solid #CD3695;
-    position: relative;
-    left: 6%;
+    position: relative;    
     border-spacing: 0;
     text-align: left;
     padding-left: 0;
@@ -89,11 +103,18 @@ tr:nth-of-type(even)
     background-color: #F4D7EA;
 }
 
+.table-wrapper
+{
+    position: relative;
+    left: 6%;
+    width: 900px;
+}
+
 .wrapper-paging
 {
     display: none;
     position: relative;
-    left: 36%;
+    left: 44.5%;
 }
 
 .wrapper-paging ul,
@@ -166,8 +187,16 @@ tr:nth-of-type(even)
 
 .wrapper-panel
 {
-	clear: both;
+	//clear: both;
 	padding-top: 10px;
+}
+
+.wrapper-active
+{
+    width: 200px;
+    display: inline-block;
+    position: relative;
+    left: 500px;
 }
 
 .searchParam
@@ -181,6 +210,11 @@ label
 {
     width: 75px;
     float: left;
+}
+
+#lblActive
+{
+    width: 100px;
 }
 
 /*========== CR SPECIFIC =========*/
@@ -199,6 +233,16 @@ label
     margin-right: 15px;
 }
 
+#tbCRList
+{
+    top: 10px;
+}
+
+.table-wrapper.cr
+{
+    width: 780px;
+}
+
 /*========== REQ SPECIFIC ========== */
 /*================================== */
 
@@ -215,6 +259,150 @@ label
     margin-right: 15px;
 }
 
+#tbReqList
+{
+    top: 10px;
+}
 
+.table-wrapper.req
+{
+    width: 780px;
+}
 
+/*========== ASSET SPECIFIC ==========*/
+/*====================================*/
+
+#pTableTitleAsset
+{
+    text-align: center;
+    width: 46em;
+}
+
+#divAssetSearch
+{
+    float: right;
+    width: 325px;
+    margin-right: 15px;
+}
+
+#tbAssetList
+{
+    top: 10px;
+}
+
+.table-wrapper.asset
+{
+    width: 925px;
+}
+
+/*========== PROJECT SPECIFIC ==========*/
+/*======================================*/
+
+#pTableTitleProject
+{
+    text-align: center;
+    width: 23em;
+}
+
+.wrapperProject
+{
+   left: 41%
+}
+
+.table-wrapper.project
+{
+    width: 450px;
+}
+
+#tbProjectList
+{
+    top: 30px;
+}
+
+/*========== BUG SPECIFIC ==========*/
+/*==================================*/
+
+#pTableTitleBug
+{    
+    text-align: center;
+    width: 38em;
+}
+
+#divBugSearch
+{
+    float: right;
+    width: 325px;
+    margin-right: 15px;
+}
+
+#tbBugList
+{
+    //top: -70px;
+    top: 10px;
+}
+
+.wrapperBug
+{
+    left: 43%;
+}
+
+.table-wrapper.bug
+{
+    width: 780px;
+}
+
+/*========== TC SPECIFIC ==========*/
+/*=================================*/
+#pTableTitleTC
+{    
+    text-align: center;
+    width: 38em;
+}
+
+#divTCSearch
+{
+    float: right;
+    width: 325px;
+    margin-right: 15px;
+}
+
+#tbTCList
+{
+    top: 30px;
+    left: -6%;
+}
+
+.wrapperTC
+{
+    left: 43%;
+}
+
+.table-wrapper.tc
+{
+    width: 780px;
+}
+
+/*========== CYCLE SPECIFIC ==========*/
+/*====================================*/
+#tbCycleList
+{
+    top: 25px;
+    left: -10%;
+}
+
+#pTableTitleCycle
+{    
+    text-align: center;
+    width: 27em;
+}
+
+.wrapperCycle
+{
+    left: 40%;
+}
+
+.table-wrapper.cycle
+{
+    width: 560px;
+}
 

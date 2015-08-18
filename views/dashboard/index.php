@@ -41,13 +41,16 @@
     
     <ul id="dashboardNav">
         <li>
+            <a class="aButton" href="<?php echo URL; ?>asset/listAsset">Asset List</a>
+        </li>
+        <li>
             <a class="aButton" href="<?php echo URL; ?>bug/listBug">Bug List</a>
         </li>
         <li>
-            <a class="aButton" href="<?php echo URL; ?>requirement/listReq">Requirements List</a>
+            <a class="aButton" href="<?php echo URL; ?>changerequest/listCR">Change Request List</a>
         </li>
         <li>
-            <a class="aButton" href="<?php echo URL; ?>changerequest/listCR">Change Request List</a>
+            <a class="aButton" href="<?php echo URL; ?>requirement/listReq">Requirements List</a>
         </li>
         <li>
             <a class="aButton" href="<?php echo URL; ?>testcase/listTC">Test Case List</a>

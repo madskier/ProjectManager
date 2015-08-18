@@ -69,9 +69,17 @@
             <td>
                 <label id="lblAssignedTo" for="ddAssignedTo">Assigned To</label>
             </td>
-            <td colspan="3">
+            <td>
                 <select id="ddAssignedTo" name="ddAssignedTo">
                     <option value="" selected>Select a Change Request First</option>
+                </select>
+            </td>
+            <td>
+                <label id="lblRequstedBy" for="ddRequestedBy">Requested By: </label>
+            </td>
+            <td>
+                <select id="ddRequestedBy" name="ddRequestedBy">
+                    <option value="" selected>Select an Informant</option>
                 </select>
             </td>
         </tr>

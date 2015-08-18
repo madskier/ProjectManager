@@ -1,10 +1,17 @@
 <!doctype html>
 <html>
 <head lang="en">
-    <meta charset="UTF-8">    
+    <meta charset="UTF-8">     
     <LINK href="<?php echo URL; ?>styles/main.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/png" href="<?php echo URL; ?>images/favicon.png">
     <script src="<?php echo URL; ?>scripts/jquery-2.1.4.min.js" type="text/javascript"></script>
     <script src="<?php echo URL; ?>scripts/common.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'te', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <?php
         if (isset($this->js))
         {
@@ -287,12 +294,101 @@
                             <a class="listitem" href="<?php echo URL; ?>dashboard/index"><span class="mainitem">Tools</span></a>
                         </div>
                         <div class="bottomHex"></div>
-                    </div>                
+                    </div>
+                    <ul>
+                        <li>
+                            <div class="hex firstsub">
+                                <div class="topHex firstsub"></div>
+                                <div class="middleHex firstsub">
+                                    <a class="sub-first sf-with-ul" href="<?php echo URL; ?>account/timesheet">Account</a>
+                                </div>
+                                <div class="bottomHex firstsub"></div>
+                            </div>                        
+                            <ul>
+                                <li>
+                                    <div class="hex firstsub first">
+                                        <div class="topHex firstsub first"></div>
+                                        <div class="middleHex firstsub first">
+                                            <a class="sub-first" href="<?php echo URL; ?>account/password">Change Password</a>
+                                        </div>
+                                        <div class="bottomHex firstsub first"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="hex firstsub second">
+                                        <div class="topHex firstsub second"></div>
+                                        <div class="middleHex firstsub second">
+                                            <a class="sub-first" href="<?php echo URL; ?>account/role">Request Role</a>
+                                        </div>
+                                        <div class="bottomHex firstsub second"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="hex firstsub third">
+                                        <div class="topHex firstsub third"></div>
+                                        <div class="middleHex firstsub third">
+                                            <a class="sub-first" href="<?php echo URL; ?>account/timesheet">Timesheet</a>
+                                        </div>
+                                        <div class="bottomHex firstsub third"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <div class="hex secondsub">
+                                <div class="topHex secondsub"></div>
+                                <div class="middleHex secondsub">
+                                    <a class="sub-last sf-with-ul" href="<?php echo URL; ?>schedule/listSchedule">Cycle</a>
+                                </div>
+                                <div class="bottomHex secondsub"></div>
+                            </div>                        
+                            <ul>
+                                <li>
+                                    <div class="hex secondsub first">
+                                        <div class="topHex secondsub first"></div>
+                                        <div class="middleHex secondsub first">
+                                            <a class="sub-first" href="<?php echo URL; ?>schedule/create">Create</a>
+                                        </div>
+                                        <div class="bottomHex firstsub first"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="hex secondsub second">
+                                        <div class="topHex secondsub second"></div>
+                                        <div class="middleHex secondsub second">
+                                            <a class="sub-first" href="<?php echo URL; ?>schedule/edit/0">Edit</a>
+                                        </div>
+                                        <div class="bottomHex secondsub second"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="hex secondsub third">
+                                        <div class="topHex secondsub third"></div>
+                                        <div class="middleHex secondsub third">
+                                            <a class="sub-first" href="<?php echo URL; ?>schedule/listSchedule">List</a>
+                                        </div>
+                                        <div class="bottomHex secondsub third"></div>
+                                    </div>                                
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
         <div id="divLogButton">
             <button type="button" id="btnLogOut" onclick="location.href='<?php echo URL; ?>dashboard/logout'">Log Out</button>
         </div>
+        <div id="google_translate_element"></div>
+        <div id="divHelp">
+            <a id="aHelp" href="<?php echo URL; ?>help/index">
+                <img src="<?php echo URL; ?>images/helpIcon.png" id="helpIcon"/>
+            </a>
+        </div>
+        <div id="divHome">
+            <a id="aHome" href="<?php echo URL; ?>dashboard/index">
+                <img src="<?php echo URL; ?>images/homeIcon.png" id="homeIcon"/>
+            </a>
+        </div>        
     </div>    
     <div id="maincontent" class="maincontent">

@@ -1,6 +1,7 @@
+var gURL = globalURL;
 function getArea(projectID, areaID)
 {        
-    var url = "http://localhost:80/ProjectManager/bug/ajaxGetArea/" + projectID;
+    var url = gURL + "bug/ajaxGetArea/" + projectID;
     
     $.get(url, function(result)
     {
@@ -23,7 +24,8 @@ function getArea(projectID, areaID)
 
 function getPlatform(platformID)
 {
-     $.get('http://localhost:80/ProjectManager/index/ajaxGetPlatform', function(result){
+     var url = gURL + "index/ajaxGetPlatform";
+     $.get(url, function(result){
         $('#ddPlatform').find('option').remove().end().append('<option value="" selected>Select a Platform</option>');
         $('#ddPlatform').append(result);
         
@@ -41,7 +43,8 @@ function getProject(projectID, fieldName)
         fieldName = '#ddProject';
     }
     
-    $.get('http://localhost:80/ProjectManager/project/ajaxGetProject', function(result){
+    var url = gURL + 'project/ajaxGetProject';
+    $.get(url, function(result){
         $(fieldName).find('option').remove().end().append('<option value="">Select a Project</option>');
         $(fieldName).append(result);
         
@@ -59,7 +62,8 @@ function getEmployee(employeeID, fieldName)
         fieldName = '#ddAssignedTo';
     }
     
-    $.get('http://localhost:80/ProjectManager/index/ajaxGetUser', function(result){
+    var url = gURL + 'index/ajaxGetUser';
+    $.get(url, function(result){
         $(fieldName).find('option').remove().end().append('<option value="" selected>Select a User</option>');
         $(fieldName).append(result);
         
@@ -83,7 +87,7 @@ function getStatus(currStatus, fieldName)
     $(fieldName).append('<option value="Active">Active</option>');
     $(fieldName).append('<option value="Fixed">Fixed</option>');
     $(fieldName).append('<option value="Cannot Reproduce">Cannot Reproduce</option>');
-    $(fieldName).append('<option value="Deffered">Deffered</option>');
+    $(fieldName).append('<option value="Deferred">Deferred</option>');
     $(fieldName).append('<option value="Closed">Closed</option>');
     
     if (currStatus !== null)
@@ -94,7 +98,7 @@ function getStatus(currStatus, fieldName)
 
 function getBugByID(bugID)
 {
-    var url = "http://localhost:80/ProjectManager/bug/ajaxGetBugByID/" + bugID;
+    var url = gURL + "bug/ajaxGetBugByID/" + bugID;
     
     $.getJSON(url, function(result)
     {
@@ -106,6 +110,26 @@ function getBugByID(bugID)
         getStatus(result.status, null);
         getPlatform(result.platformID);
         getEmployee(result.assignedToID, null);
+        $('#txtTime').val(result.time);
+        getTimeInterval(result.interval, null);
         $('#hdnID').val(bugID);
     });
+}
+
+function getTimeInterval(currInterval, fieldName)
+{
+     if (fieldName === null)
+    {
+        fieldName = '#ddTime';
+    }
+
+    $(fieldName).find('option').remove().end();
+    $(fieldName).append('<option value="Hours">Hours</option>');
+    $(fieldName).append('<option value="Days">Days</option>');
+    $(fieldName).append('<option value="Weeks">Weeks</option>');
+    
+    if (currInterval !== null)
+    {
+        $(fieldName).val(currInterval).attr('selected', true);
+    }
 }

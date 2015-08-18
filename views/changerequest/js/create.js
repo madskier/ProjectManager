@@ -1,8 +1,9 @@
+var gURL = globalURL;
 $(function(){
     hideDetail();
     getProject(null, null);    
     getEmployee(null, null);
-    
+    getInformant(null, null);
     $('#fCreateCR').submit(function() {
          var url = $(this).attr('action');
          var data = $(this).serialize();
@@ -18,7 +19,7 @@ $(function(){
                  alert("Change Request Created Successfully");
              }
              
-             document.location.href = "http://localhost:80/ProjectManager/changerequest/listCR";
+             document.location.href = gURL + "changerequest/listCR";
          });
          
          return false;

@@ -1,3 +1,4 @@
+var gURL = globalURL;
 $(function(){
     
     getProject(null, null);    
@@ -10,7 +11,7 @@ $(function(){
          
          $.post(url, data, function(callback){
              alert("Test Case Successfully Created");
-             document.location.href = "http://localhost:80/ProjectManager/testcase/listTC";
+             document.location.href = gURL + "testcase/listTC";
          });
          return false;
     });

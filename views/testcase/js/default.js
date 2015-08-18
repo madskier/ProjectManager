@@ -1,3 +1,4 @@
+var gURL = globalURL;
 function getProject(projectID, fieldName)
 {
     if (fieldName === null)
@@ -5,7 +6,8 @@ function getProject(projectID, fieldName)
         fieldName = '#ddProject';
     }
     
-    $.get('http://localhost:80/ProjectManager/project/ajaxGetProject', function(result){
+    var url = gURL + 'project/ajaxGetProject';
+    $.get(url, function(result){
         $(fieldName).find('option').remove().end().append('<option value="">Select a Project</option>');
         $(fieldName).append(result);
         
@@ -23,7 +25,7 @@ function getArea(projectID, areaID, fieldName)
         fieldName = '#ddArea';
     }
     
-    var url = "http://localhost:80/ProjectManager/bug/ajaxGetArea/" + projectID;
+    var url = gURL + "bug/ajaxGetArea/" + projectID;
     
     $.get(url, function(result)
     {
@@ -51,7 +53,8 @@ function getEmployee(employeeID, fieldName)
         fieldName = '#ddAssignedTo';
     }
     
-    $.get('http://localhost:80/ProjectManager/index/ajaxGetUser', function(result){
+    var url = gURL + 'index/ajaxGetUser';
+    $.get(url, function(result){
         $(fieldName).find('option').remove().end().append('<option value="" selected>Select a User</option>');
         $(fieldName).append(result);
         
@@ -78,6 +81,23 @@ function getStatus(currStatus, fieldName)
     {
         $(fieldName).val(currStatus).attr('selected', true);
     }
+}
+
+function getTCByID(tcID)
+{
+    var url = gURL + "testcase/ajaxGetTCByID/" + tcID;
+    
+    $.getJSON(url, function(result)
+    {
+        $('#txtTitle').val(result.name);
+        $('#txtaDescription').val(result.description);        
+        $('#txtaRepro').val(result.reproSteps);
+        getProject(result.projectID, null);        
+        getArea(result.projectID, result.areaID, null);        
+        getStatus(result.status, null);        
+        getEmployee(result.assignedToID, null);        
+        $('#hdnID').val(tcID);
+    });
 }
 
 

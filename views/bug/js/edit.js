@@ -1,3 +1,4 @@
+var gURL = globalURL;
 $(function(){
         
     getProject(null, '#ddSearchProject');
@@ -8,7 +9,7 @@ $(function(){
          
          $.post(url, data, function(callback){
              alert("Bug Successfully Edited");
-             document.location.href = "http://localhost:80/ProjectManager/bug/listBug";
+             document.location.href = gURL + "bug/listBug";
          });
          return false;
     });
@@ -16,7 +17,7 @@ $(function(){
 
 function getTitles(projectID)
 {
-    var url = "http://localhost:80/ProjectManager/bug/ajaxGetBugsByProject/" + projectID;
+    var url = gURL + "bug/ajaxGetBugsByProject/" + projectID;
     
     $.get(url, function(result)
     {

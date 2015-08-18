@@ -97,9 +97,9 @@ class Bug extends Controller
         $this->model->ajaxGetBugByID($bugID);
     }
     
-    function ajaxGetList($projectID, $assignedTo, $status)
+    function ajaxGetList($projectID, $assignedTo, $status, $active, $cycle)
     {
-        $this->model->ajaxGetList($projectID, $assignedTo, $status);
+        $this->model->ajaxGetList($projectID, $assignedTo, $status, $active, $cycle);
     }
  }
 

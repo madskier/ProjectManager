@@ -1,3 +1,4 @@
+var gURL = globalURL;
 function getArea(projectID, areaID, fieldName)
 {
     if (fieldName === null)
@@ -5,7 +6,7 @@ function getArea(projectID, areaID, fieldName)
         fieldName = '#ddArea';
     }
     
-    var url = "http://localhost:80/ProjectManager/bug/ajaxGetArea/" + projectID;
+    var url = gURL + "bug/ajaxGetArea/" + projectID;
     
     $.get(url, function(result)
     {
@@ -33,7 +34,8 @@ function getProject(projectID, fieldName)
         fieldName = '#ddProject';
     }
     
-    $.get('http://localhost:80/ProjectManager/project/ajaxGetProject', function(result){
+    var url = gURL + 'project/ajaxGetProject';
+    $.get(url, function(result){
         $(fieldName).find('option').remove().end().append('<option value="">Select a Project</option>');
         $(fieldName).append(result);
         
@@ -51,7 +53,8 @@ function getEmployee(employeeID, fieldName)
         fieldName = '#ddAssignedTo';
     }
     
-    $.get('http://localhost:80/ProjectManager/index/ajaxGetUser', function(result){
+    var url = gURL + 'index/ajaxGetUser';
+    $.get(url, function(result){
         $(fieldName).find('option').remove().end().append('<option value="" selected>Select a User</option>');
         $(fieldName).append(result);
         
@@ -105,7 +108,7 @@ function getPriority(currPriority, fieldName)
 
 function getCRByID(crID)
 {
-    var url = "http://localhost:80/ProjectManager/changerequest/ajaxGetCRByID/" + crID;
+    var url = gURL + "changerequest/ajaxGetCRByID/" + crID;
     
     $.getJSON(url, function(result)
     {
@@ -121,6 +124,7 @@ function getCRByID(crID)
         $('#txtTime').val(result.time);
         getTimeInterval(result.interval, null);
         getExistingReqs(crID, result.projectID, null);
+        getInformant(result.requestedBy, null);
         $('#hdnID').val(crID);
     });
 }
@@ -155,9 +159,10 @@ function getReqsByProject(projectID, fieldName)
     {
         fieldName = '#mlReqMap';
     }
-    var url = 'http://localhost:80/ProjectManager/requirement/ajaxGetReqsByProject/' + projectID;
+    var url = gURL + 'requirement/ajaxGetReqsByProject/' + projectID;
     $.get(url, function(result){
         $(fieldName).find('option').remove().end();
+        $(fieldName).append('<option value="" selected>Select One or More Requirements</option>');
         $(fieldName).append(result);      
     });
 }
@@ -171,7 +176,7 @@ function getExistingReqs(crID, projectID, fieldName)
     
     getReqsByProject(projectID, fieldName);
     
-    var url = 'http://localhost:80/ProjectManager/changerequest/ajaxGetReqsLinkedCR/' + crID;
+    var url = gURL + 'changerequest/ajaxGetReqsLinkedCR/' + crID;
     
     $.getJSON(url, function(result){
                 
@@ -180,6 +185,25 @@ function getExistingReqs(crID, projectID, fieldName)
             $(fieldName).val(result).prop('selected', true);          
         }
     });   
+}
+
+function getInformant(currInformant, fieldName)
+{
+    if (fieldName === null)
+    {
+        fieldName = '#ddRequestedBy';
+    }
+    
+    $(fieldName).find('option').remove().end().append('<option value="">Select an Informant</option>');
+    $(fieldName).append('<option value="Client">Client</option>');
+    $(fieldName).append('<option value="Developer">Developer</option>');
+    $(fieldName).append('<option value="Tester">Tester</option>');
+    $(fieldName).append('<option value="Administration">Administration</option>');
+    
+    if (currInformant !== null)
+    {
+        $(fieldName).val(currInformant).attr('selected', true);
+    }
 }
 
 

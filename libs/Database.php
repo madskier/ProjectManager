@@ -17,12 +17,11 @@ class Database extends PDO
             $host = $config['server'];
             $dbname = $config['dbname'];
             $user = $config['username'];
-            $pass = $config['password'];
+            $pass = $config['password'];            
             parent::__construct('mysql:host='.$host.';dbname='.$dbname, $user, $pass);
-            //self::$connection = new PDO("mysql:host=$host;dbname=$dbname", $user, '');            
         } 
         catch (PDOException $ex) {
-            $this->error($ex->getMessage());
+            echo $ex;
         }
     } 
     

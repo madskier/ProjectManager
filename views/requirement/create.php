@@ -15,7 +15,23 @@
                  <label id="lblDescription" for="txtaDescription">Description</label>
             </td>
             <td colspan="3">
-                <textarea id="txtaDescription" name="txtaDescription" cols="1" rows="1" required></textarea>
+                <textarea id="txtaDescription" name="txtaDescription" cols="1" rows="1"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label id="lblRoles" for="txtaRoles">Role Permissions</label>                
+            </td>
+            <td colspan="3">
+                <textarea id="txtaRoles" name="txtaRoles" cols="1" rows="1"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label id="lblRoles" for="txtaRules">Business Rules</label>                
+            </td>
+            <td colspan="3">
+                <textarea id="txtaRules" name="txtaRules" cols="1" rows="1"></textarea>
             </td>
         </tr>
         <tr>
@@ -33,6 +49,16 @@
             <td>
                 <select id="ddArea" name="ddArea">
                     <option value="" selected>Select a Project First</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label id="lblStatus" for="ddStatus">Status</label>
+            </td>
+            <td>
+                <select id="ddStatus" name="ddStatus">
+                    
                 </select>
             </td>
         </tr>

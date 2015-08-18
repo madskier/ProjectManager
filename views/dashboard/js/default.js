@@ -1,3 +1,4 @@
+var gURL = globalURL;
 $(function(){
     getList(true);
 });
@@ -75,22 +76,21 @@ function getList(active)
     var url = "";
     if (active === true)
     {
-        url = "http://localhost:80/ProjectManager/index/ajaxGetList/1";
+        url = gURL + "index/ajaxGetList/1";
     }
     else if (active === false)
     {
-        url = "http://localhost:80/ProjectManager/index/ajaxGetList/0";
+        url = gURL + "index/ajaxGetList/0";
     }
     
     $.getJSON(url, function(result)
-    {       
-        console.log(result);
+    {                 
         for (var i = 0; i < result.length; i++)
-        {
-            var editURL = "http://localhost:80/ProjectManager/"+ result[i].type +"/edit/";
-            var detailsURL = "http://localhost:80/ProjectManager/"+ result[i].type +"/view/";
+        {            
+            var editURL = gURL + result[i].type +"/edit/";
+            var detailsURL = gURL + result[i].type +"/view/";
                         
-            $('#tbDashboard').append('<tr class="main"><td>' + result[i].type + '</td><td>' + result[i].id + '</td><td>' + result[i].name + '</td><td>' + result[i].priority + '</td><td>' + result[i].status + '</td><td><a href="'+ editURL + result[i].id +'"><img class="editIcon" src="http://localhost:80/ProjectManager/images/editIcon.png" alt="Edit"/></a></td><td><a href="'+ detailsURL + result[i].id +'"><img class="detailsIcon" src="http://localhost:80/ProjectManager/images/detailsIcon.png" alt="View Details"/></a></td><td><a id="'+ result[i].id +'" class="btnDel" rel="'+ result[i].type +'" href="#"><img class="deleteIcon" src="http://localhost:80/ProjectManager/images/deleteIcon.png" alt="Delete"/></a>'+'</td></tr>');
+            $('#tbDashboard').append('<tr class="main"><td>' + result[i].type + '</td><td>' + result[i].id + '</td><td>' + result[i].name + '</td><td>' + result[i].priority + '</td><td>' + result[i].status + '</td><td><a href="'+ editURL + result[i].id +'"><img class="editIcon" src="'+ gURL + 'images/editIcon.png" alt="Edit"/></a></td><td><a href="'+ detailsURL + result[i].id +'"><img class="detailsIcon" src="'+ gURL +'images/detailsIcon.png" alt="View Details"/></a></td><td><a id="'+ result[i].id +'" class="btnDel" rel="'+ result[i].type +'" href="#"><img class="deleteIcon" src="'+ gURL +'images/deleteIcon.png" alt="Delete"/></a>'+'</td></tr>');
         }  
         
         $(".wrapper-paging").show();
@@ -114,6 +114,9 @@ function getList(active)
                 case "changerequest":
                     deleteCR(id);
                     break;
+                case "asset":
+                    deleteAsset(id);
+                    break;
                 }               
             }
             
@@ -124,7 +127,7 @@ function getList(active)
 
 function deleteBug(id)
 {
-    var url = "http://localhost:80/ProjectManager/bug/ajaxDelete/" + id;
+    var url = gURL + "bug/ajaxDelete/" + id;
     $.get(url, function()
     {
         alert('Bug Successfully Deleted');
@@ -134,7 +137,7 @@ function deleteBug(id)
 
 function deleteTC(id)
 {
-    var url = "http://localhost:80/ProjectManager/testcase/ajaxDelete/" + id;
+    var url = gURL + "testcase/ajaxDelete/" + id;
     $.get(url, function()
     {
         alert('Test Case Successfully Deleted');
@@ -144,10 +147,20 @@ function deleteTC(id)
 
 function deleteCR(id)
 {
-    var url = "http://localhost:80/ProjectManager/changerequest/ajaxDelete/" + id;
+    var url = gURL + "changerequest/ajaxDelete/" + id;
     $.get(url, function()
     {
         alert('Change Request Successfully Deleted');
+        getList(true);
+    });
+}
+
+function deleteAsset(id)
+{
+    var url = gURL + "asset/ajaxDelete/" + id;
+    $.get(url, function()
+    {
+        alert('Asset Successfully Deleted');
         getList(true);
     });
 }

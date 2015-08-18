@@ -1,3 +1,4 @@
+var gURL = globalURL;
 function getProject(projectID, fieldName)
 {
     if (fieldName === null)
@@ -5,7 +6,8 @@ function getProject(projectID, fieldName)
         fieldName = '#ddProject';
     }
     
-    $.get('http://localhost:80/ProjectManager/project/ajaxGetProject', function(result){
+    var url = gURL + 'project/ajaxGetProject';
+    $.get(url, function(result){
         $(fieldName).find('option').remove().end().append('<option value="">Select a Project</option>');
         $(fieldName).append(result);
         
@@ -23,7 +25,7 @@ function getArea(projectID, areaID, fieldName)
         fieldName = '#ddArea';
     }
     
-    var url = "http://localhost:80/ProjectManager/bug/ajaxGetArea/" + projectID;
+    var url = gURL + "bug/ajaxGetArea/" + projectID;
     
     $.get(url, function(result)
     {
@@ -51,7 +53,8 @@ function getEmployee(employeeID, fieldName)
         fieldName = '#ddLMBList';
     }
     
-    $.get('http://localhost:80/ProjectManager/index/ajaxGetUser', function(result){
+    var url = gURL + 'index/ajaxGetUser';
+    $.get(url, function(result){
         $(fieldName).find('option').remove().end().append('<option value="" selected>Select a User</option>');
         $(fieldName).append(result);
         
@@ -64,14 +67,35 @@ function getEmployee(employeeID, fieldName)
 
 function getReqByID(reqID)
 {
-    var url = "http://localhost:80/ProjectManager/requirement/ajaxGetReqByID/" + reqID;
+    var url = gURL + "requirement/ajaxGetReqByID/" + reqID;
     
     $.getJSON(url, function(result)
     {
         $('#txtTitle').val(result.name);
-        $('#txtaDescription').val(result.description);        
+        $('#txtaDescription').val(result.description); 
+        $('#txtaRoles').val(result.roles);
+        $('#txtaRules').val(result.businessRules);
         getProject(result.projectID, null);        
-        getArea(result.projectID, result.areaID, null);       
+        getArea(result.projectID, result.areaID, null);
+        getStatus(result.status, null);
         $('#hdnID').val(reqID);
     });
+}
+
+function getStatus(currStatus, fieldName)
+{
+    if (fieldName === null)
+    {
+        fieldName = '#ddStatus';
+    }   
+    $(fieldName).find('option').remove().end().append('<option value="">Select a Status</option>');
+    $(fieldName).append('<option value="Design">Design</option>');
+    $(fieldName).append('<option value="Approved">Approved</option>');
+    $(fieldName).append('<option value="Active">Active</option>');
+    $(fieldName).append('<option value="Closed">Closed</option>');
+    
+    if (currStatus !== null)
+    {
+        $(fieldName).val(currStatus).attr('selected', true);
+    }
 }

@@ -10,26 +10,19 @@ class Changerequest_Model extends Model
     {
         $sth = $this->db->prepare('SELECT email FROM employee WHERE id = :assignedTo');
         $sth->execute(array(':assignedTo' => $user));
+        $toEmail = $sth->fetch();
+        $toEmail = (string)$toEmail[0];
         
         $sth2 = $this->db->prepare('SELECT email, name FROM employee WHERE id = :submittedBy');
         $sth2->execute(array(':submittedBy' => $submittedBy));
         $data = $sth2->fetch();
         
-        foreach($data as $value)
-        {           
-            $submittedByName = $value['name'];
-            $fromEmail = $value['email'];
-        }
-        unset($value);    
-        
-        $toEmail = $sth->fetch();
-        $fromEmail = $sth2->fetch();
-        $submittedByName = $sth3->fetch();
-        $msg = $submittedByName . "has assigned a Change Request to you. \r\n Please take the appropriate action for the CR. \r\n\r\n The Change Request Title is " . $name . ".";
-        $subject = "CR assigned to you";
-        $headers = "From: " . $fromEmail . "\r\n" .
-                   "Reply-To: " . $fromEmail . "\r\n" .
-                   "X-Mailer: PHP/" . phpversion();
+        $submittedByName = (string)$data[1];
+        $fromEmail = (string)$data[0];       
+       
+        $msg = $submittedByName . " has assigned a Change Request to you. \r\n Please accomplish this task as soon as possible. \r\n\r\n The Change Request Title is: " . $name . ". \r\n http://www.fluxlogicstudios.com/codecycle";
+        $subject = "CodeCycle: Change Request assigned to you";
+        $headers = "From: " . $fromEmail . "\r\n" . "X-Mailer: PHP/" . phpversion();
         
         mail($toEmail, $subject, $msg, $headers);
     }
@@ -43,20 +36,23 @@ class Changerequest_Model extends Model
         $priority = strip_tags(filter_input(INPUT_POST, 'ddPriority'));
         $project = strip_tags(filter_input(INPUT_POST, 'ddProject'));        
         $status = strip_tags(filter_input(INPUT_POST, 'ddStatus'));
+        $requested_by = strip_tags(filter_input(INPUT_POST, 'ddRequestedBy'));
         $approach = strip_tags(filter_input(INPUT_POST, 'txtaApproach'));
         $time = strip_tags(filter_input(INPUT_POST, 'txtTime'));
         $interval = strip_tags(filter_input(INPUT_POST, 'ddTime'));
         $question = strip_tags(filter_input(INPUT_POST, 'txtaQuestions'));
         
+        $reqsToMap = array();
         $reqsToMap = $_POST['mlReqMap'];       
         
         try
         {
             $username = Session::get('username');
-            $sth1 = $this->db->prepare('SELECT id FROM Employee WHERE username = :username');
+            $sth1 = $this->db->prepare('SELECT id FROM employee WHERE username = :username');
             $sth1->execute(array(':username' => $username));
 
             $submitted_by = $sth1->fetch();
+            $varSubmittedBy = (string)$submitted_by[0];
         }
         catch (PDOException $e)
         {
@@ -65,9 +61,9 @@ class Changerequest_Model extends Model
         
         try
         {
-            $sth = $this->db->prepare('INSERT INTO changerequest (approach, area_affected, assigned_to, complete_time, description, name, priority, project, question, status, time_interval) VALUES (:approach, :area, :assignedTo, :time, :description, :name, :priority, :project, :question, :status, :interval)');
+            $sth = $this->db->prepare('INSERT INTO changerequest (approach, area_affected, assigned_to, complete_time, description, name, priority, project, question, status, time_interval, requested_by) VALUES (:approach, :area, :assignedTo, :time, :description, :name, :priority, :project, :question, :status, :interval, :requestedBy)');
             
-            $sth->execute(array(':approach' => $approach, ':area' => $area, ':assignedTo' => $assigned_to, ':time' => $time ,':description' => $description, ':name' => $name, ':priority' => $priority, ':project' => $project, ':question' => $question ,':status' => $status, ':interval' => $interval));
+            $sth->execute(array(':approach' => $approach, ':area' => $area, ':assignedTo' => $assigned_to, ':time' => $time ,':description' => $description, ':name' => $name, ':priority' => $priority, ':project' => $project, ':question' => $question ,':status' => $status, ':interval' => $interval, ':requestedBy' => $requested_by));
         
             $sth2 = $this->db->prepare('SELECT id FROM changerequest ORDER BY id desc limit 1');
             $sth2->execute();
@@ -98,7 +94,7 @@ class Changerequest_Model extends Model
         
         if ($assigned_to)
         {
-            sendEmail($assigned_to, $name, $submitted_by); 
+            $this->sendEmail($assigned_to, $name, $varSubmittedBy); 
         }
     }
     
@@ -111,6 +107,7 @@ class Changerequest_Model extends Model
         $priority = strip_tags(filter_input(INPUT_POST, 'ddPriority'));
         $project = strip_tags(filter_input(INPUT_POST, 'ddProject'));     
         $status = strip_tags(filter_input(INPUT_POST, 'ddStatus'));
+        $requested_by = strip_tags(filter_input(INPUT_POST, 'ddRequestedBy'));
         $approach = strip_tags(filter_input(INPUT_POST, 'txtaApproach'));
         $time = strip_tags(filter_input(INPUT_POST, 'txtTime'));
         $interval = strip_tags(filter_input(INPUT_POST, 'ddTime'));
@@ -122,10 +119,11 @@ class Changerequest_Model extends Model
         try
         {
             $username = Session::get('username');
-            $sth1 = $this->db->prepare('SELECT id FROM Employee WHERE username = :username');
+            $sth1 = $this->db->prepare('SELECT id FROM employee WHERE username = :username');
             $sth1->execute(array(':username' => $username));
-
             $submitted_by = $sth1->fetch();
+            $varSubmittedBy = (string)$submitted_by[0];
+            $sth1 = null;
         }
         catch (PDOException $e)
         {
@@ -134,8 +132,21 @@ class Changerequest_Model extends Model
         
         try
         {
-            $sth = $this->db->prepare('UPDATE changerequest SET approach = :approach, area_affected = :area, assigned_to = :assignedTo, complete_time = :time, description = :description, name = :name, priority = :priority, project = :project, question = :question, status = :status, time_interval = :interval WHERE id = :id');
-            $sth->execute(array(':approach' => $approach,':area' => $area, ':assignedTo' => $assigned_to, ':time' => $time,':description' => $description, ':name' => $name, ':priority' => $priority, ':project' => $project, ':question' => $question, ':status' => $status, ':interval' => $interval, ':id' => $id));
+            $sth1 = $this->db->prepare('SELECT assigned_to FROM changerequest WHERE id = :id');
+            $sth1->execute(array(':id' => $id));
+            $currAssignedTo = $sth1->fetch();
+            $varCurrAssignedTo = (string)$currAssignedTo[0];
+            $sth1 = null;
+        } 
+        catch (PDOException $ex)
+        {
+            echo $e->getMessage();
+        }
+        
+        try
+        {
+            $sth = $this->db->prepare('UPDATE changerequest SET approach = :approach, area_affected = :area, assigned_to = :assignedTo, complete_time = :time, description = :description, name = :name, priority = :priority, project = :project, question = :question, status = :status, time_interval = :interval, requested_by = :requestedBy WHERE id = :id');
+            $sth->execute(array(':approach' => $approach,':area' => $area, ':assignedTo' => $assigned_to, ':time' => $time,':description' => $description, ':name' => $name, ':priority' => $priority, ':project' => $project, ':question' => $question, ':status' => $status, ':interval' => $interval, ':requestedBy' => $requested_by, ':id' => $id));
         }
         catch (PDOException $e)
         {
@@ -159,13 +170,30 @@ class Changerequest_Model extends Model
                 }
             }            
         }
-        sendEmail($assigned_to, $name, $submitted_by);
+        
+        if ($assigned_to != $varCurrAssignedTo && $status != "Closed" && $status != "Deferred")
+        {
+            $this->sendEmail($assigned_to, $name, $varSubmittedBy);
+        }
     }
     
     function ajaxDelete($id)
     {
-        $sth = $this->db->prepare('DELETE FROM changerequest WHERE id = :id');
-        $sth->execute(array(':id' => $id));
+        try
+        {
+           $sth = $this->db->prepare('DELETE FROM changerequest WHERE id = :id');
+           $sth->execute(array(':id' => $id));
+
+           $sth1 = $this->db->prepare('DELETE FROM crreqmap WHERE cr_id = :id');
+           $sth1->execute(array(':id' => $id));
+
+           $sth=null;
+           $sth1=null;   
+        } 
+        catch (PDOException $ex) {
+            echo $ex->getMessage();
+        }
+        
     }
     
     function ajaxGetCRsByProject($projectID)
@@ -184,7 +212,7 @@ class Changerequest_Model extends Model
     
     function ajaxGetCRByID($crID)
     {       
-        $sth = $this->db->prepare('SELECT changerequest.approach, changerequest.area_affected, changerequest.assigned_to, changerequest.complete_time, changerequest.description, changerequest.id, changerequest.name, changerequest.priority, changerequest.project, changerequest.question, changerequest.status, changerequest.time_interval FROM changerequest WHERE id = :crID');
+        $sth = $this->db->prepare('SELECT changerequest.approach, changerequest.area_affected, changerequest.assigned_to, changerequest.complete_time, changerequest.description, changerequest.id, changerequest.name, changerequest.priority, changerequest.project, changerequest.question, changerequest.status, changerequest.time_interval, changerequest.requested_by FROM changerequest WHERE id = :crID');
         $sth->setFetchMode(PDO::FETCH_ASSOC);
         $sth->execute(array(':crID' => $crID));
         $data = $sth->fetchAll();       
@@ -203,6 +231,7 @@ class Changerequest_Model extends Model
             $data["question"] = $value['question'];
             $data["status"] = $value['status'];    
             $data["interval"] = $value['time_interval'];
+            $data["requestedBy"] = $value['requested_by']; 
         }
         
         echo json_encode($data);
@@ -223,7 +252,7 @@ class Changerequest_Model extends Model
         echo json_encode($data);
     }
     
-    function ajaxGetList($projectID, $assignedTo, $status)
+    function ajaxGetList($projectID, $assignedTo, $status, $active, $cycle)
     {
         $sql = 'SELECT changerequest.id, changerequest.name, changerequest.status, IFNULL(employee.name, "None") AS assigned_to FROM changerequest LEFT JOIN employee ON changerequest.assigned_to = employee.id WHERE changerequest.id > 0';        
                 
@@ -240,6 +269,15 @@ class Changerequest_Model extends Model
         if ($status != "" && (string)$status != "0")
         {
             $sql .= ' AND changerequest.status = "' . (string)$status . '"';
+        }
+        if ($active === "false")
+        {
+            $sql .= ' AND changerequest.status != "Closed" AND changerequest.status != "Deferred" AND changerequest.status != "Testing"';
+        }
+        
+        if ($cycle > 0)
+        {
+            $sql .= ' AND changerequest.cycle = ' . (string)$cycle;
         }
         
         $sql .= ' ORDER BY changerequest.id';

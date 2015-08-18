@@ -1,3 +1,4 @@
+var gURL = globalURL;
 function getProject(projectID, fieldName)
 {
     if (fieldName === null)
@@ -5,7 +6,8 @@ function getProject(projectID, fieldName)
         fieldName = '#ddProject';
     }
     
-    $.get('http://localhost:80/ProjectManager/project/ajaxGetProject', function(result){
+    var url = gURL + 'project/ajaxGetProject';    
+    $.get(url, function(result){
         $(fieldName).find('option').remove().end().append('<option value="">Select a Project</option>');
         $(fieldName).append(result);
         
@@ -23,7 +25,8 @@ function getEmployee(employeeID, fieldName)
         fieldName = '#ddAssignedTo';
     }
     
-    $.get('http://localhost:80/ProjectManager/index/ajaxGetUser', function(result){
+    var url = gURL + 'index/ajaxGetUser';
+    $.get(url, function(result){
         $(fieldName).find('option').remove().end().append('<option value="" selected>Select a User</option>');
         $(fieldName).append(result);
         
@@ -53,6 +56,43 @@ function getType(currType, fieldName)
     {
         $(fieldName).val(currType).attr('selected', true);
     }
+}
+
+function getStatus(currStatus, fieldName)
+{
+    if (fieldName === null)
+    {
+        fieldName = '#ddStatus';
+    }
+    
+    $(fieldName).find('option').remove().end().append('<option value="">Select a Status</option>');
+    $(fieldName).append('<option value="Design">Design</option>');
+    $(fieldName).append('<option value="Concept Created">Concept Created</option>');
+    $(fieldName).append('<option value="Ready For Review">Ready For Review</option>');
+    $(fieldName).append('<option value="Finalized and Committed">Finalized and Committed</option>');
+    $(fieldName).append('<option value="In Project">In Project</option>');
+    $(fieldName).append('<option value="Deferred">Deferred</option>');   
+    $(fieldName).append('<option value="Deferred">Closed</option>');
+    
+    if (currStatus !== null)
+    {
+        $(fieldName).val(currStatus).attr('selected', true);
+    }
+}
+
+function getAssetByID(assetID)
+{
+    var url = gURL + "asset/ajaxGetAssetByID/" + assetID;
+    
+    $.getJSON(url, function(result)
+    {
+        $('#txtTitle').val(result.name);               
+        getProject(result.projectID, null);        
+        getStatus(result.status, null);
+        getType(result.type, null);
+        getEmployee(result.assignedToID, null);
+        $('#hdnID').val(assetID);
+    });
 }
 
 

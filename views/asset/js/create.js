@@ -1,8 +1,10 @@
+var gURL = globalURL;
 $(function(){
     
     getProject(null, null);
     getType(null, null);
     getEmployee(null, null);
+    getStatus(null, null);
     
     $('#fCreateAsset').submit(function() {
          var url = $(this).attr('action');
@@ -10,7 +12,7 @@ $(function(){
          
          $.post(url, data, function(callback){
              alert("Asset(s) Successfully Created");
-             document.location.href = "http://localhost:80/ProjectManager/asset/listAsset";
+             document.location.href = gURL + "asset/listAsset";
          });
          return false;
     });
